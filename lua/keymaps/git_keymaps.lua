@@ -35,11 +35,10 @@ noremap <leader>ps :call <SID>AskForConfirmation('push commit ',':Git push')<CR>
 " nmap <leader>l :e<CR>
 ]]
 
-keymap("n", "<leader>g", ":G<CR>", opts)
-keymap("n", "<leader>up", ":Git push --set-upstream origin ", opts)
+keymap("n", "<leader>g", ":G<CR>", opts_show)
+--keymap("n", "<leader>up", ":Git push --set-upstream origin ", opts)
 keymap("n", "<leader>fe", ":Git fetch --all -p<CR>", opts_show)
 keymap("n", "<leader>pl", ":Git pull<CR>", opts_show)
 
-keymap("n", "<leader>do", ":DiffviewOpen<CR>", opts)
 keymap("n", "<leader>dc", ":DiffviewClose<CR>", opts)
 keymap("n", "<leader>dh", ":DiffviewFileHistory<CR>", opts)
