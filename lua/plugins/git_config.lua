@@ -53,3 +53,15 @@ require('gitsigns').setup {
     -- ['n ghr'] = '<cmd> lua require"gitsigns".toggle_deleted()<CR>',
   }
 }
+
+local actions = require("diffview.actions")
+
+require("diffview").setup({
+  keymaps = {
+    disable_defaults = false, -- Disable the default keymaps
+    view = {
+      ["[x"]         = actions.prev_conflict,             -- In the merge_tool: jump to the previous conflict
+      ["]x"]         = actions.next_conflict,             -- In the merge_tool: jump to the next conflict
+    },
+  },
+})
