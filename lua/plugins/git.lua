@@ -46,7 +46,7 @@ require('gitsigns').setup {
   },
   keymaps                           = {
     noremap = true,
-    ['n <leader>s'] = '<cmd> lua require"gitsigns".preview_hunk()<CR>',
+    ['n <leader>p'] = '<cmd> lua require"gitsigns".preview_hunk()<CR>',
     ['n <leader>i'] = '<cmd> lua require"gitsigns".blame_line()<CR>',
     ['n ]c'] = { expr = true, "&diff ? '[c' : '<cmd> lua require\"gitsigns\".prev_hunk()<CR>'" },
     ['n [c'] = { expr = true, "&diff ? ']c' : '<cmd> lua require\"gitsigns\".next_hunk()<CR>'" },

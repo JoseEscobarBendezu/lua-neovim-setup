@@ -13,8 +13,10 @@ require('packer').startup(function(use)
   use 'easymotion/vim-easymotion' -- Vim motions on speed!
   use 'christoomey/vim-system-copy' -- system clipboard
   use 'tpope/vim-fugitive'          -- git commands
-  use 'samoshkin/vim-mergetool'     -- git commands
+  -- use 'samoshkin/vim-mergetool'     -- git commands
   use 'preservim/tagbar'     -- ctag bar
+
+  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   
   use 'tpope/vim-surround' -- Autopairs
   use 'numToStr/Comment.nvim'
@@ -56,8 +58,7 @@ require('packer').startup(function(use)
   use 'lukas-reineke/cmp-rg'
   use 'hrsh7th/vim-vsnip-integ'
   use 'ray-x/lsp_signature.nvim'
-  
-
+ 
   use 'lewis6991/gitsigns.nvim'
   
   use 'mfussenegger/nvim-dap'
