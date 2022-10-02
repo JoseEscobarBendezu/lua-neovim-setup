@@ -9,21 +9,21 @@ end
 
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
-  use 'lewis6991/impatient.nvim' -- Improve startup time for Neovim 
+  use 'lewis6991/impatient.nvim' -- Improve startup time for Neovim
   use 'easymotion/vim-easymotion' -- Vim motions on speed!
   use 'christoomey/vim-system-copy' -- system clipboard
   use 'tpope/vim-fugitive'          -- git commands
   use 'preservim/tagbar'     -- ctag bar
 
   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
-  
+
   use 'tpope/vim-surround' -- Autopairs
   use 'numToStr/Comment.nvim'
-  
+
   use 'nvim-lualine/lualine.nvim' -- Status bar
   use 'rmehri01/onenord.nvim'
   use 'lukas-reineke/indent-blankline.nvim' -- Indent rainbow
-  
+
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
@@ -46,31 +46,31 @@ require('packer').startup(function(use)
   use 'williamboman/nvim-lsp-installer'
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-  
+
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
-  
+
   use 'lukas-reineke/cmp-rg'
   use 'hrsh7th/vim-vsnip-integ'
   use 'ray-x/lsp_signature.nvim'
- 
+
   use 'lewis6991/gitsigns.nvim'
-  
+
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
   use 'ttbug/DAPInstall.nvim'
-  
+
   use 'folke/trouble.nvim'
-  
+
   use({
       "iamcco/markdown-preview.nvim",
       run = function() vim.fn["mkdp#util#install"]() end,
   })
-  
+
   if is_bootstrap then
     require('packer').sync()
   end

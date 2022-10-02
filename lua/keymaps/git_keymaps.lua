@@ -30,9 +30,6 @@ endfunction
 noremap <leader>r :call <SID>AskForConfirmation('reset HEAD for this branch ',':Git reset HEAD~1')<CR>
 noremap <leader>ps :call <SID>AskForConfirmation('push commit ',':Git push')<CR>
 
-" nmap <leader>m <plug>(MergetoolToggle)<CR>
-" nmap <leader>a :diffget<CR>
-" nmap <leader>l :e<CR>
 ]]
 
 local last_tabpage = vim.api.nvim_get_current_tabpage()

@@ -28,7 +28,7 @@ opt.cmdheight=1
 opt.completeopt="menu,menuone,noselect" --LSP autocomplete menu
 opt.autoread = true                    --Refresh file with is external modify
 opt.incsearch = true                        --Highline with typing search
-opt.hlsearch = true        -- Set highlight on search
+-- opt.hlsearch = true        -- Set highlight on search
 opt.wildmenu = true                        --Show autocomplete cmd commands
 opt.diffopt ="vertical"
 opt.laststatus=3                      --Hidden inactive panels status
@@ -36,7 +36,7 @@ opt.mouse = "a"           -- Enable mouse mode
 opt.hidden = true
 
 -- opt.termguicolors = true   -- Enable colors in terminal
--- opt.breakindent = true     -- Enable break indent
+opt.breakindent = true     -- Enable break indent
 -- opt.ignorecase = true      -- Case insensitive searching unless /C or capital in search
 -- opt.smartcase = true       -- Smart case
 -- opt.updatetime = 250       -- Decrease update time
