@@ -1,4 +1,7 @@
 local opt = vim.opt
+local prefix = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config")
+
+vim.opt.undodir = { prefix .. "/nvim/.undo//"}
 
 opt.encoding = "utf-8"    -- Format text
 opt.number = true          -- Make line numbers default
@@ -16,7 +19,7 @@ opt.sw=2                              --Indent space
 opt.tabstop=2                         --Space equals Tabs
 opt.showtabline=2                     --Show tabas ever
 opt.undofile = true        -- Save undo history
-opt.undodir=".undodir"            --Created undodir
+-- opt.undodir=vim.fn.stdpath('config') .. '/.undo'            --Created undodir
 opt.splitright = true                        --Split open rigth
 opt.splitbelow = true                       --Split open bottom
 -- opt.paste = true
