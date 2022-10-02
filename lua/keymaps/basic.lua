@@ -97,6 +97,6 @@ keymap("i", "<C-j>", "<Down>", opts)
 
 keymap("n", "<C-l>", "<cmd>TroubleToggle<cr>", opts)
 keymap("n", "<C-m>", ":MarkdownPreviewToggle<cr>", opts)
-keymap("n", "<leader>e", "<Plug>(easymotion-s2)", opts)
+keymap("n", "<leader>e", "<Plug>(easymotion-overwin-f)", opts)
 
 

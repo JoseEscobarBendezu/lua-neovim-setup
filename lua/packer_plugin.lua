@@ -13,7 +13,6 @@ require('packer').startup(function(use)
   use 'easymotion/vim-easymotion' -- Vim motions on speed!
   use 'christoomey/vim-system-copy' -- system clipboard
   use 'tpope/vim-fugitive'          -- git commands
-  -- use 'samoshkin/vim-mergetool'     -- git commands
   use 'preservim/tagbar'     -- ctag bar
 
   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
@@ -72,8 +71,6 @@ require('packer').startup(function(use)
       run = function() vim.fn["mkdp#util#install"]() end,
   })
   
-  --use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
-
   if is_bootstrap then
     require('packer').sync()
   end

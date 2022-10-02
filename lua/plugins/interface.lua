@@ -44,7 +44,6 @@ require('lualine').setup {
           alpha = 'Alpha',
           NvimTree = ''
         }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
-
         buffers_color = {
           -- Same values as the general color option can be used here.
           active = 'lualine_b_normal', -- Color for active buffer.
@@ -52,6 +51,11 @@ require('lualine').setup {
         },
         icons_enabled = true,
         separator = nil,
+        symbols = { 
+          modified = ' ﴖ',      -- Text to show when the buffer is modified
+          alternate_file = '', -- Text to show to identify the alternate file
+          directory =  '',     -- Text to show when the buffer is a directory
+        },
       }
     },
     lualine_b = {},

@@ -18,7 +18,7 @@ require 'nvim-treesitter.configs'.setup {
   context_commentstring = { enable = true, },
   autotag = {
     enable = true,
-    disable = { 'html', 'javascript' }
+    -- disable = { 'html', 'javascript' }
   },
   autopairs = { enable = false, },
   rainbow = {
