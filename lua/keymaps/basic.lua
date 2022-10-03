@@ -1,4 +1,4 @@
-vim.cmd [[
+vim.cmd([[
 
 let mapleader = " "
 
@@ -81,9 +81,10 @@ endfunction
 " noremap L :call<SID>buffer_name()<CR>
 noremap <silent> q :call <SID>close_window()<CR>
 noremap <silent> Q :%bd\|e#\|bd#<cr>\|'" 
-]]
+]])
 
 local opts = { noremap = true, silent = true }
+local opts_show = { noremap = true, silent = false }
 local keymap = vim.api.nvim_set_keymap
 
 keymap("n", "r", "<C-r>", opts)
@@ -95,8 +96,5 @@ keymap("i", "<C-h>", "<Left>", opts)
 keymap("i", "<C-k>", "<Up>", opts)
 keymap("i", "<C-j>", "<Down>", opts)
 
-keymap("n", "<C-l>", "<cmd>TroubleToggle<cr>", opts)
-keymap("n", "<C-m>", ":MarkdownPreviewToggle<cr>", opts)
-keymap("n", "<leader>e", "<Plug>(easymotion-overwin-f)", opts)
-
-
+keymap("n", "<C-m>", "<Plug>MarkdownPreviewToggle<cr>", opts_show)
+keymap("n", "<leader>e", "<Plug>(easymotion-overwin-f2)", opts)

@@ -51,7 +51,7 @@ local on_attach = function(client, bufnr)
 			},
 		})
 		ts_utils.setup_client(client)
-		bufmap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
+		-- bufmap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
 		-- bufmap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
 		-- bufmap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
 	end
@@ -105,25 +105,46 @@ vim.diagnostic.config({
 	update_in_insert = false,
 })
 
-require("mason").setup()
-
 --formatting and diagnostics
 local null_ls = require("null-ls")
 
 local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
-local code_actions = null_ls.builtins.code_actions
+local diagnostic = null_ls.builtins.diagnostics
+local code_action = null_ls.builtins.code_actions
+
+-- local formatings = { "eslint_d", "stylua" }
+-- local diagnostics = { "eslint_d" }
+-- local code_actions = { "eslint_d" }
+--
+-- function sources()
+-- 	local source = {}
+-- 	for _, format in pairs(formatings) do
+-- 		table.insert(source, formating[format])
+-- 	end
+--
+-- 	for _, diagnos in pairs(diagnostics) do
+-- 		table.insert(source, diagnostic[diagnos])
+-- 	end
+--
+-- 	for _, action in pairs(code_actions) do
+-- 		table.insert(source, diagnostic[action])
+-- 	end
+--
+-- 	return source
+-- end
 
 null_ls.setup({
 	debug = true,
 	sources = {
 		formatting.eslint_d,
 		formatting.stylua,
-		code_actions.eslint_d,
-		diagnostics.eslint_d,
+		code_action.eslint_d,
+		diagnostic.eslint_d,
 	},
 	on_attach = on_attach,
 })
+
+require("mason").setup()
 
 require("mason-null-ls").setup({
 	automatic_installation = true,
