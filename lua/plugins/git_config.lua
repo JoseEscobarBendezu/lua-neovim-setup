@@ -66,7 +66,7 @@ require("diffview").setup({
 			["<leader>co"] = actions.conflict_choose("ours"), -- Choose the OURS version of a conflict
 			["<leader>ct"] = actions.conflict_choose("theirs"), -- Choose the THEIRS version of a conflict
 			["<leader>cb"] = actions.conflict_choose("base"), -- Choose the BASE version of a conflict
-			["<leader>a"] = actions.conflict_choose("all"), -- Choose all the versions of a conflict
+			["<leader>ca"] = actions.conflict_choose("all"), -- Choose all the versions of a conflict
 			["dx"] = actions.conflict_choose("none"), -- Delete the conflict region
 		},
 	},
