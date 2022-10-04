@@ -89,6 +89,7 @@ local keymap = vim.api.nvim_set_keymap
 
 keymap("n", "r", "<C-r>", opts)
 keymap("n", "w", ":w<CR>", opts)
+keymap("n", "m", ":q<CR>", opts)
 
 keymap("i", "<C-q>", "<Esc>", opts)
 keymap("i", "<C-l>", "<Right>", opts)
@@ -96,5 +97,5 @@ keymap("i", "<C-h>", "<Left>", opts)
 keymap("i", "<C-k>", "<Up>", opts)
 keymap("i", "<C-j>", "<Down>", opts)
 
-keymap("n", "<C-m>", "<Plug>MarkdownPreviewToggle<cr>", opts_show)
 keymap("n", "<leader>e", "<Plug>(easymotion-overwin-f2)", opts)
+keymap("n", "<C-m>", "<Plug>MarkdownPreviewToggle<cr>", opts_show)
