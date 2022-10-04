@@ -62,7 +62,7 @@ require("diffview").setup({
 		view = {
 			["[x"] = actions.prev_conflict, -- In the merge_tool: jump to the previous conflict
 			["]x"] = actions.next_conflict, -- In the merge_tool: jump to the next conflict
-			["<leader>co"] = actions.conflict_choose("ours"), -- Choose the OURS version of a conflict
+			["<leader>co2"] = actions.conflict_choose("ours"), -- Choose the OURS version of a conflict
 			["<leader>ct"] = actions.conflict_choose("theirs"), -- Choose the THEIRS version of a conflict
 
 			["<leader>cb"] = actions.conflict_choose("base"), -- Choose the BASE version of a conflict
