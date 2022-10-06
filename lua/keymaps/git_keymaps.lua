@@ -28,17 +28,19 @@ function! s:AskForConfirmation(message, command) abort
 endfunction
 
 noremap <leader>r :call <SID>AskForConfirmation('reset HEAD for this branch ',':Git reset HEAD~1')<CR>
+
 noremap <leader>ps :call <SID>AskForConfirmation('push commit ',':Git push')<CR>
 ]])
 
 local last_tabpage = vim.api.nvim_get_current_tabpage()
+
 function DiffviewToggle()
 	local lib = require("diffview.lib")
 	local view = lib.get_current_view()
 	if view then
 		-- Current tabpage is a Diffview; close it
 		vim.cmd(":DiffviewClose")
-		vim.cmd(":e")
+		require("indent_blankline.commands").enable()
 	else
 		-- No open Diffview exists: open a new one
 		vim.cmd(":DiffviewOpen")

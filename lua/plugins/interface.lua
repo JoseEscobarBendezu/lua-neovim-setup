@@ -89,14 +89,31 @@ vim.opt.termguicolors = true
 vim.api.nvim_set_hl(0, "IndentBlanklineIndent1", { fg = "#76393E", nocombine = true })
 vim.api.nvim_set_hl(0, "IndentBlanklineIndent2", { fg = "#6f5d3c", nocombine = true })
 vim.api.nvim_set_hl(0, "IndentBlanklineIndent3", { fg = "#5a7347", nocombine = true })
-vim.api.nvim_set_hl(0, "IndentBlanklineIndent4", { fg = "#56B6C2", nocombine = true })
+vim.api.nvim_set_hl(0, "IndentBlanklineIndent4", { fg = "#408a91", nocombine = true })
 vim.api.nvim_set_hl(0, "IndentBlanklineIndent5", { fg = "#30666c", nocombine = true })
 vim.api.nvim_set_hl(0, "IndentBlanklineIndent6", { fg = "#683f74", nocombine = true })
+
+-- vim.api.nvim_set_hl(0, "IndentBlanklineContextStart", { fg = "#76393E", underline = false })
 
 vim.opt.list = true
 
 require("indent_blankline").setup({
+	filetype_exclude = {
+		"NvimTree",
+		"TelescopePrompt",
+		"TelescopeResults",
+		"alpha",
+		"help",
+		"lspinfo",
+		"mason.nvim",
+		"nvchad_cheatsheet",
+		"packer",
+		"terminal",
+		"",
+	},
 	space_char_blankline = " ",
+	-- show_current_context = true,
+	-- show_current_context_start = true,
 	char_highlight_list = {
 		"IndentBlanklineIndent1",
 		"IndentBlanklineIndent2",
@@ -171,6 +188,8 @@ vim.api.nvim_set_hl(0, "CmpItemKindMethod", { bg = NONE, fg = "#C586C0" })
 vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = NONE, fg = "#D4D4D4" })
 vim.api.nvim_set_hl(0, "CmpItemKindProperty", { bg = NONE, fg = "#D4D4D4" })
 vim.api.nvim_set_hl(0, "CmpItemKindUnit", { bg = NONE, fg = "#D4D4D4" })
+
+vim.api.nvim_set_hl(0, "Cursor", { bg = "black", fg = "white" })
 
 -- sign define DiagnosticSignError text=🦊 texthl=DiagnosticSignError linehl= numhl=
 -- sign define DiagnosticSignWarn text=😤 texthl=DiagnosticSignWarn linehl= numhl=

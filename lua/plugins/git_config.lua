@@ -49,6 +49,9 @@ require("gitsigns").setup({
 	},
 })
 
+vim.cmd([[nnoremap <expr> [c &diff ? ']c' : '[c']])
+vim.cmd([[nnoremap <expr> ]c &diff ? '[c' : ']c']])
+
 local actions = require("diffview.actions")
 
 require("diffview").setup({
@@ -60,14 +63,22 @@ require("diffview").setup({
 	},
 	keymaps = {
 		view = {
-			["<C-k>"] = actions.toggle_files, -- Toggle the file panel.
-			["[x"] = actions.prev_conflict, -- In the merge_tool: jump to the previous conflict
-			["]x"] = actions.next_conflict, -- In the merge_tool: jump to the next conflict
 			["<leader>co"] = actions.conflict_choose("ours"), -- Choose the OURS version of a conflict
 			["<leader>ct"] = actions.conflict_choose("theirs"), -- Choose the THEIRS version of a conflict
 			["<leader>cb"] = actions.conflict_choose("base"), -- Choose the BASE version of a conflict
 			["<leader>ca"] = actions.conflict_choose("all"), -- Choose all the versions of a conflict
 			["dx"] = actions.conflict_choose("none"), -- Delete the conflict region
 		},
+	},
+	hooks = {
+		diff_buf_win_enter = function()
+			-- Turn off line wrapping and list chars and relative numbers
+			vim.opt_local.wrap = false
+			vim.opt_local.list = false
+			vim.opt_local.relativenumber = false
+
+			-- Disable indentation guides
+			require("indent_blankline.commands").disable()
+		end,
 	},
 })
