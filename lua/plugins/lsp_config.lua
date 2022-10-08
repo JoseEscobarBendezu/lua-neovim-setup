@@ -1,101 +1,106 @@
--- Include the servers you want to have installed by default below
+local lspconfig = require("lspconfig")
+
 local servers = {
 	"jsonls",
 	"intelephense",
 	"html",
 	"cssls",
-	"volar",
+	"emmet_ls",
 	"sumneko_lua",
 	"tsserver",
+	"volar",
 }
 
---set laguaje servers
 require("nvim-lsp-installer").setup({
 	ensure_installed = servers,
 })
 
-local opts = { noremap = true, silent = true }
+local keymaps = require("keymaps/lsp_keymaps")
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local keymap = vim.keymap.set
-local bufmap = vim.api.nvim_buf_set_keymap
+local enable_capabilities = function(client, formatting, diagnostic, rangformatting)
+	if vim.fn.has("nvim-0.8.0") == 1 then
+		client.server_capabilities.documentFormattingProvider = formatting
+		client.server_capabilities.document_diagnostics = diagnostic
+		client.server_capabilities.documentRangeFormattingProvider = rangformatting
+	else
+		client.resolved_capabilities.document_formatting = formatting
+		client.resolved_capabilities.document_diagnostics = diagnostic
+		client.resolved_capabilities.document_range_formatting = rangformatting
+	end
+end
 
-local keymaps = function(bufnr)
-	keymap("n", "gp", "<cmd> lua vim.diagnostic.open_float()<CR>", opts)
-	keymap("n", "]d", "<cmd> lua vim.diagnostic.goto_prev()<CR>", opts)
-	keymap("n", "[d", "<cmd> lua vim.diagnostic.goto_next()<CR>", opts)
-	bufmap(bufnr, "n", "gr", "<cmd> lua vim.lsp.buf.rename()<CR>", opts)
-	bufmap(bufnr, "n", "gi", "<cmd> lua vim.lsp.buf.implementation()<CR>", opts)
-	bufmap(bufnr, "n", "gh", "<cmd> lua vim.lsp.buf.hover()<CR>", opts)
-	bufmap(bufnr, "n", "gd", "<cmd> lua vim.lsp.buf.definition()<CR>", opts)
-	bufmap(bufnr, "n", "gv", "<cmd>vsplit<cr><cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	bufmap(bufnr, "n", "gx", "<cmd>split<cr><cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	bufmap(bufnr, "n", "gt", "<cmd>tab split<cr><cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	bufmap(bufnr, "n", "gc", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	-- keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-	-- keymap(bufnr, 'n', 'rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-	-- bufmap(bufnr, 'n', 'gf', ':lua vim.lsp.buf.formatting()<CR>', opts)
+local ts_config = function(client)
+	local ts_utils = require("nvim-lsp-ts-utils")
+	-- https://github.com/Microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
+	ts_utils.setup({
+		enable_import_on_completion = true,
+		filter_out_diagnostics_by_code = {
+			6133, --is declared but its value is never read
+			1109, --Expression expected.
+			1155, -- 'const' declarations must be initialized.
+		},
+	})
+	ts_utils.setup_client(client)
+	-- bufmap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
+	-- bufmap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
+	-- bufmap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
 end
 
 local on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
-		client.server_capabilities.documentFormattingProvider = false
-		client.server_capabilities.documentRangeFormattingProvider = false
-		local ts_utils = require("nvim-lsp-ts-utils")
-		-- https://github.com/Microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
-		ts_utils.setup({
-			enable_import_on_completion = true,
-			filter_out_diagnostics_by_code = {
-				6133, --is declared but its value is never read
-				1109, --Expression expected.
-				1155, -- 'const' declarations must be initialized.
-			},
-		})
-		ts_utils.setup_client(client)
-		-- bufmap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
-		-- bufmap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
-		-- bufmap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
+		enable_capabilities(client, false, true, false)
+		ts_config(client)
 	end
 	if client.name == "volar" then
-		client.server_capabilities.documentFormattingProvider = false
-		client.resolved_capabilities.document_diagnostics = false
-		client.server_capabilities.documentRangeFormattingProvider = false
+		enable_capabilities(client, false, true, false)
 	end
 	if client.name == "sumneko_lua" then
-		client.server_capabilities.documentFormattingProvider = false
-		client.server_capabilities.documentRangeFormattingProvider = false
+		enable_capabilities(client, false, true, false)
 	end
-	keymaps(bufnr)
-	vim.cmd([[
-    augroup LspFormatting
+	keymaps.set(bufnr)
+	if vim.fn.has("nvim-0.8.0") == 1 then
+		vim.cmd([[
+      augroup LspFormatting
         autocmd! * <buffer>
-        autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = true })
-    augroup END
-  ]])
+        autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })
+      augroup END
+    ]])
+	else
+		vim.cmd([[
+      augroup LspFormatting
+        autocmd! * <buffer>
+        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+      augroup END
+    ]])
+	end
 end
 
--- Setup lspconfig.
-local lspconfig = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 for _, server in ipairs(servers) do
-	if server["name"] == "sumneko_lua" then
-		lspconfig[server].setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
-			settings = {
-				Lua = {
-					diagnostics = {
-						globals = { "vim" },
-					},
+	local config = {}
+	if server == "sumneko_lua" then
+		config.settings = {
+			Lua = {
+				diagnostics = {
+					globals = { "vim" },
 				},
 			},
-		})
-	else
-		lspconfig[server].setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
-		})
+		}
 	end
+	if server == "emmet_ls" then
+		config.filetypes = { "html" }
+	end
+	if server == "volar" then
+		config.filetypes = { "vue" }
+		config.init_options = {
+			typescript = {
+				tsdk = "/home/jose/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib",
+			},
+		}
+	end
+	config.on_attach = on_attach
+	config.capabilities = capabilities
+	lspconfig[server].setup(config)
 end
 
 vim.diagnostic.config({
@@ -112,34 +117,22 @@ local formatting = null_ls.builtins.formatting
 local diagnostic = null_ls.builtins.diagnostics
 local code_action = null_ls.builtins.code_actions
 
--- local formatings = { "eslint_d", "stylua" }
--- local diagnostics = { "eslint_d" }
--- local code_actions = { "eslint_d" }
---
--- function sources()
--- 	local source = {}
--- 	for _, format in pairs(formatings) do
--- 		table.insert(source, formating[format])
--- 	end
---
--- 	for _, diagnos in pairs(diagnostics) do
--- 		table.insert(source, diagnostic[diagnos])
--- 	end
---
--- 	for _, action in pairs(code_actions) do
--- 		table.insert(source, diagnostic[action])
--- 	end
---
--- 	return source
--- end
-
 null_ls.setup({
 	debug = true,
 	sources = {
-		formatting.eslint_d,
+		formatting.eslint_d.with({
+			-- filetypes = { "javascript", "typescriptreact", "typescript", "javascriptreact" },
+			-- disabled_filetypes = { "vue" },
+		}),
 		formatting.stylua,
-		code_action.eslint_d,
-		diagnostic.eslint_d,
+		code_action.eslint_d.with({
+			-- filetypes = { "javascript", "typescriptreact", "typescript", "javascriptreact" },
+			-- disabled_filetypes = { "vue" },
+		}),
+		diagnostic.eslint_d.with({
+			-- filetypes = { "javascript", "typescriptreact", "typescript", "javascriptreact" },
+			-- disabled_filetypes = { "vue" },
+		}),
 	},
 	on_attach = on_attach,
 })

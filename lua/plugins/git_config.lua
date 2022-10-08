@@ -52,6 +52,9 @@ require("gitsigns").setup({
 vim.cmd([[nnoremap <expr> [c &diff ? ']c' : '[c']])
 vim.cmd([[nnoremap <expr> ]c &diff ? '[c' : ']c']])
 
+vim.cmd([[nnoremap <expr> [\[ &diff ? '<nop>' : '[\[' ]])
+vim.cmd([[nnoremap <expr> ]\] &diff ? '<nop>' : ']\]' ]])
+
 local actions = require("diffview.actions")
 
 require("diffview").setup({

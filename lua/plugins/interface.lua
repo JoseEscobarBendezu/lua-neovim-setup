@@ -93,8 +93,6 @@ vim.api.nvim_set_hl(0, "IndentBlanklineIndent4", { fg = "#408a91", nocombine = t
 vim.api.nvim_set_hl(0, "IndentBlanklineIndent5", { fg = "#30666c", nocombine = true })
 vim.api.nvim_set_hl(0, "IndentBlanklineIndent6", { fg = "#683f74", nocombine = true })
 
--- vim.api.nvim_set_hl(0, "IndentBlanklineContextStart", { fg = "#76393E", underline = false })
-
 vim.opt.list = true
 
 require("indent_blankline").setup({
@@ -109,11 +107,11 @@ require("indent_blankline").setup({
 		"nvchad_cheatsheet",
 		"packer",
 		"terminal",
+		"Trouble",
 		"",
 	},
 	space_char_blankline = " ",
-	-- show_current_context = true,
-	-- show_current_context_start = true,
+	show_current_context = true,
 	char_highlight_list = {
 		"IndentBlanklineIndent1",
 		"IndentBlanklineIndent2",
@@ -123,6 +121,10 @@ require("indent_blankline").setup({
 		"IndentBlanklineIndent6",
 	},
 })
+
+vim.api.nvim_set_hl(0, "IndentBlanklineContextStart", { underline = false })
+vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { fg = "#C1866B" })
+vim.api.nvim_set_hl(0, "DiffText", { bg = "black", fg = "#C1866B", bold = true, underline = false })
 
 vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#292e39", bg = "#292e39" })
 vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { fg = "#292e39", bg = "#292e39" })
@@ -140,17 +142,17 @@ vim.api.nvim_set_hl(0, "lualine_a_buffers_active", { bg = "#2E3440", fg = "#9fa5
 vim.api.nvim_set_hl(0, "TabLine", { cterm = underline, ctermfg = 15, ctermbg = 242, fg = "#6C7A96", bg = "red" })
 vim.api.nvim_set_hl(0, "TabLineFill", { cterm = reverse, fg = "#6C7A96", bg = "red" })
 
-vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = NONE, strikethrough = true, fg = "#808080" })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = NONE, fg = "#569CD6" })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { bg = NONE, fg = "#569CD6" })
-vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = NONE, fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindInterface", { bg = NONE, fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindText", { bg = NONE, fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = NONE, fg = "#C586C0" })
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", { bg = NONE, fg = "#C586C0" })
-vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = NONE, fg = "#D4D4D4" })
-vim.api.nvim_set_hl(0, "CmpItemKindProperty", { bg = NONE, fg = "#D4D4D4" })
-vim.api.nvim_set_hl(0, "CmpItemKindUnit", { bg = NONE, fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = "NONE", strikethrough = true, fg = "#808080" })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#569CD6" })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { bg = "NONE", fg = "#569CD6" })
+vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
+vim.api.nvim_set_hl(0, "CmpItemKindInterface", { bg = "NONE", fg = "#9CDCFE" })
+vim.api.nvim_set_hl(0, "CmpItemKindText", { bg = "NONE", fg = "#9CDCFE" })
+vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE", fg = "#C586C0" })
+vim.api.nvim_set_hl(0, "CmpItemKindMethod", { bg = "NONE", fg = "#C586C0" })
+vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindProperty", { bg = "NONE", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindUnit", { bg = "NONE", fg = "#D4D4D4" })
 
 vim.fn.sign_define(
 	"DiagnosticSignError",
@@ -177,19 +179,17 @@ vim.api.nvim_set_hl(0, "DiagnosticLineNrWarn", { bg = "#51412A", fg = "#FFA500",
 vim.api.nvim_set_hl(0, "DiagnosticLineNrInfo", { bg = "#1E535D", fg = "#00FFFF", bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticLineNrHint", { bg = "#1E205D", fg = "#0000FF", bold = true })
 
-vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = NONE, gui = strikethrough, fg = "#808080" })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = NONE, fg = "#569CD6" })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { bg = NONE, fg = "#569CD6" })
-vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = NONE, fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindInterface", { bg = NONE, fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindText", { bg = NONE, fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = NONE, fg = "#C586C0" })
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", { bg = NONE, fg = "#C586C0" })
-vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = NONE, fg = "#D4D4D4" })
-vim.api.nvim_set_hl(0, "CmpItemKindProperty", { bg = NONE, fg = "#D4D4D4" })
-vim.api.nvim_set_hl(0, "CmpItemKindUnit", { bg = NONE, fg = "#D4D4D4" })
-
-vim.api.nvim_set_hl(0, "Cursor", { bg = "black", fg = "white" })
+vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = "NONE", gui = strikethrough, fg = "#808080" })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#569CD6" })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { bg = "NONE", fg = "#569CD6" })
+vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
+vim.api.nvim_set_hl(0, "CmpItemKindInterface", { bg = "NONE", fg = "#9CDCFE" })
+vim.api.nvim_set_hl(0, "CmpItemKindText", { bg = "NONE", fg = "#9CDCFE" })
+vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE", fg = "#C586C0" })
+vim.api.nvim_set_hl(0, "CmpItemKindMethod", { bg = "NONE", fg = "#C586C0" })
+vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindProperty", { bg = "NONE", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindUnit", { bg = "NONE", fg = "#D4D4D4" })
 
 -- sign define DiagnosticSignError text=🦊 texthl=DiagnosticSignError linehl= numhl=
 -- sign define DiagnosticSignWarn text=😤 texthl=DiagnosticSignWarn linehl= numhl=

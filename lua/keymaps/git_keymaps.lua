@@ -32,8 +32,6 @@ noremap <leader>r :call <SID>AskForConfirmation('reset HEAD for this branch ',':
 noremap <leader>ps :call <SID>AskForConfirmation('push commit ',':Git push')<CR>
 ]])
 
-local last_tabpage = vim.api.nvim_get_current_tabpage()
-
 function DiffviewToggle()
 	local lib = require("diffview.lib")
 	local view = lib.get_current_view()
