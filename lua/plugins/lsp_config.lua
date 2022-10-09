@@ -4,7 +4,7 @@ local servers = {
 	"jsonls",
 	"intelephense",
 	"html",
-	"cssls",
+	"stylelint_lsp",
 	"emmet_ls",
 	"sumneko_lua",
 	"tsserver",
@@ -47,33 +47,55 @@ local ts_config = function(client)
 	-- bufmap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
 end
 
+local lsp_flags = {
+	-- This is the default in Nvim 0.7+
+	debounce_text_changes = 150,
+}
+
 local on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
 		enable_capabilities(client, false, true, false)
 		ts_config(client)
 	end
 	if client.name == "volar" then
-		enable_capabilities(client, false, true, false)
+		enable_capabilities(client, true, true, true)
 	end
 	if client.name == "sumneko_lua" then
 		enable_capabilities(client, false, true, false)
 	end
-	keymaps.set(bufnr)
-	if vim.fn.has("nvim-0.8.0") == 1 then
-		vim.cmd([[
-      augroup LspFormatting
-        autocmd! * <buffer>
-        autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })
-      augroup END
-    ]])
-	else
-		vim.cmd([[
-      augroup LspFormatting
-        autocmd! * <buffer>
-        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-      augroup END
-    ]])
+	if client.name == "stylelint_lsp" then
+		enable_capabilities(client, true, true, true)
 	end
+	keymaps.set(bufnr)
+
+	vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		group = augroup,
+		buffer = bufnr,
+		callback = function()
+			if vim.fn.has("nvim-0.8.0") == 1 then
+				vim.lsp.buf.format({ bufnr = bufnr })
+			else
+				vim.lsp.buf.formatting_sync()
+			end
+		end,
+	})
+
+	-- if vim.fn.has("nvim-0.8.0") == 1 then
+	-- 	vim.cmd([[
+	--      augroup LspFormatting
+	--        autocmd! * <buffer>
+	--        autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })
+	--      augroup END
+	--    ]])
+	-- else
+	-- vim.cmd([[
+	--     augroup LspFormatting
+	--       autocmd! * <buffer>
+	--       autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+	--     augroup END
+	--   ]])
+	-- end
 end
 
 for _, server in ipairs(servers) do
@@ -90,6 +112,17 @@ for _, server in ipairs(servers) do
 	if server == "emmet_ls" then
 		config.filetypes = { "html" }
 	end
+	if server == "stylelint_lsp" then
+		config.filetypes = { "css" }
+		config.settings = {
+			stylelintplus = {
+				autoFixOnSave = true,
+				autoFixOnFormat = true,
+				configFile = "/home/jose/Config/.stylelintrc.json",
+				-- see available options in stylelint-lsp documentation
+			},
+		}
+	end
 	if server == "volar" then
 		config.filetypes = { "vue" }
 		config.init_options = {
@@ -100,6 +133,7 @@ for _, server in ipairs(servers) do
 	end
 	config.on_attach = on_attach
 	config.capabilities = capabilities
+	config.lsp_flag = lsp_flags
 	lspconfig[server].setup(config)
 end
 
@@ -121,18 +155,15 @@ null_ls.setup({
 	debug = true,
 	sources = {
 		formatting.eslint_d.with({
-			-- filetypes = { "javascript", "typescriptreact", "typescript", "javascriptreact" },
-			-- disabled_filetypes = { "vue" },
+			disabled_filetypes = { "vue" },
 		}),
-		formatting.stylua,
 		code_action.eslint_d.with({
-			-- filetypes = { "javascript", "typescriptreact", "typescript", "javascriptreact" },
-			-- disabled_filetypes = { "vue" },
+			disabled_filetypes = { "vue" },
 		}),
 		diagnostic.eslint_d.with({
-			-- filetypes = { "javascript", "typescriptreact", "typescript", "javascriptreact" },
-			-- disabled_filetypes = { "vue" },
+			disabled_filetypes = { "vue" },
 		}),
+		formatting.stylua,
 	},
 	on_attach = on_attach,
 })

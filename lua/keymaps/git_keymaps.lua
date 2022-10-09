@@ -48,7 +48,7 @@ end
 keymap("n", "<leader>gg", ":G<CR>", opts)
 keymap("n", "<leader>up", ":Git push --set-upstream origin ", opts_show)
 
-keymap("n", "<leader>fe", ":Git fetch --all -p<CR>", opts_show)
+keymap("n", "<leader>fe", ":Git fetch --all -p<CR>", opts)
 keymap("n", "<leader>pl", ":Git pull<CR>", opts_show)
 
 keymap("n", "<leader>ss", ":Git stash save<CR>", opts_show)
