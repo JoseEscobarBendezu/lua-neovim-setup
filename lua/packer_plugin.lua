@@ -13,7 +13,6 @@ require("packer").startup(function(use)
 	use("easymotion/vim-easymotion") -- Vim motions on speed!
 	use("christoomey/vim-system-copy") -- system clipboard
 	use("tpope/vim-fugitive") -- git commands
-	use("preservim/tagbar") -- ctag bar
 
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
@@ -30,7 +29,7 @@ require("packer").startup(function(use)
 	})
 	use("JoosepAlviste/nvim-ts-context-commentstring") -- Context comment in html css and js for template-string treesitter
 	use("windwp/nvim-autopairs") -- Autopairs ({['`
-	use("windwp/nvim-ts-autotag")
+	use({ "windwp/nvim-ts-autotag", requires = { { "nvim-treesitter/nvim-treesitter" } } })
 	use("p00f/nvim-ts-rainbow")
 
 	use({

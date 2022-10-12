@@ -19,7 +19,7 @@ local keymaps = require("keymaps/lsp_keymaps")
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local enable_capabilities = function(client, formatting, diagnostic, rangformatting)
-	if vim.fn.has("nvim-0.8.0") == 1 then
+	if vim.fn.has("nvim-0.8") == 1 then
 		client.server_capabilities.documentFormattingProvider = formatting
 		client.server_capabilities.document_diagnostics = diagnostic
 		client.server_capabilities.documentRangeFormattingProvider = rangformatting
@@ -73,7 +73,7 @@ local on_attach = function(client, bufnr)
 		group = augroup,
 		buffer = bufnr,
 		callback = function()
-			if vim.fn.has("nvim-0.8.0") == 1 then
+			if vim.fn.has("nvim-0.8") == 1 then
 				vim.lsp.buf.format({ bufnr = bufnr })
 			else
 				vim.lsp.buf.formatting_sync()
@@ -118,7 +118,7 @@ for _, server in ipairs(servers) do
 			stylelintplus = {
 				autoFixOnSave = true,
 				autoFixOnFormat = true,
-				configFile = "/home/jose/Config/.stylelintrc.json",
+				-- configFile = "/home/jose/Config/.stylelintrc.json",
 				-- see available options in stylelint-lsp documentation
 			},
 		}
@@ -161,7 +161,7 @@ null_ls.setup({
 			disabled_filetypes = { "vue" },
 		}),
 		diagnostic.eslint_d.with({
-			disabled_filetypes = { "vue" },
+			-- disabled_filetypes = { "vue" },
 		}),
 		formatting.stylua,
 	},
