@@ -53,4 +53,26 @@ vim.fn.sign_define("DapStopped", { text = "🟢", texthl = "", linehl = "", numh
 vim.fn.sign_define("DapBreakpointCondition", { text = "🟡", texthl = "", linehl = "", numhl = "" })
 vim.fn.sign_define("DapLogPoint", { text = "🔵", texthl = "", linehl = "", numhl = "" })
 
-require("dapui").setup()
+require("dapui").setup({
+	layouts = {
+		{
+			elements = {
+				-- Elements can be strings or table with id and size keys.
+				{ id = "scopes", size = 0.25 },
+				"breakpoints",
+				"stacks",
+				"watches",
+			},
+			size = 38, -- 40 columns
+			position = "left",
+		},
+		{
+			elements = {
+				"repl",
+				"console",
+			},
+			size = 0.25, -- 25% of total lines
+			position = "bottom",
+		},
+	},
+})

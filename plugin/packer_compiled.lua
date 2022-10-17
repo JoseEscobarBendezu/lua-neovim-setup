@@ -244,11 +244,6 @@ _G.packer_plugins = {
     path = "/home/jose/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  tagbar = {
-    loaded = true,
-    path = "/home/jose/.local/share/nvim/site/pack/packer/start/tagbar",
-    url = "https://github.com/preservim/tagbar"
-  },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
     path = "/home/jose/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",

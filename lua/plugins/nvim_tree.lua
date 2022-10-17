@@ -48,7 +48,7 @@ local list = {
 	{ key = "gy", action = "copy_absolute_path" },
 	{ key = "s", action = "system_open" },
 	{ key = "S", action = "search_node" },
-	-- { key = "q",                            action = "close" },
+	-- { key = "q", action = "close" },
 	{ key = "W", action = "collapse_all" },
 	{ key = "i", action = "toggle_file_info" },
 }

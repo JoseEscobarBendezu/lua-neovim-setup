@@ -1,4 +1,5 @@
 local lspconfig = require("lspconfig")
+local util = require("lspconfig/util")
 
 local servers = {
 	"jsonls",
@@ -80,22 +81,6 @@ local on_attach = function(client, bufnr)
 			end
 		end,
 	})
-
-	-- if vim.fn.has("nvim-0.8.0") == 1 then
-	-- 	vim.cmd([[
-	--      augroup LspFormatting
-	--        autocmd! * <buffer>
-	--        autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })
-	--      augroup END
-	--    ]])
-	-- else
-	-- vim.cmd([[
-	--     augroup LspFormatting
-	--       autocmd! * <buffer>
-	--       autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-	--     augroup END
-	--   ]])
-	-- end
 end
 
 for _, server in ipairs(servers) do
@@ -124,10 +109,47 @@ for _, server in ipairs(servers) do
 		}
 	end
 	if server == "volar" then
+		config.root_dir = util.root_pattern("package.json", "vue.config.js")
 		config.filetypes = { "vue" }
 		config.init_options = {
 			typescript = {
 				tsdk = "/home/jose/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib",
+			},
+			languageFeatures = {
+				references = true,
+				definition = true,
+				typeDefinition = true,
+				callHierarchy = true,
+				hover = true,
+				rename = true,
+				signatureHelp = true,
+				codeAction = true,
+				completion = {
+					defaultTagNameCase = "both",
+					defaultAttrNameCase = "kebabCase",
+				},
+				documentLink = true,
+				codeLens = true,
+				diagnostics = true,
+			},
+			documentFeatures = {
+				selectionRange = true,
+				foldingRange = true,
+				documentSymbol = true,
+				documentColor = true,
+				documentFormatting = {
+					defaultPrintWidth = 100,
+					getDocumentPrintWidthRequest = true,
+				},
+			},
+		}
+		config.settings = {
+			volar = {
+				codeLens = {
+					references = true,
+					pugTools = true,
+					scriptSetupTools = true,
+				},
 			},
 		}
 	end
@@ -158,7 +180,7 @@ null_ls.setup({
 			disabled_filetypes = { "vue" },
 		}),
 		code_action.eslint_d.with({
-			disabled_filetypes = { "vue" },
+			-- disabled_filetypes = { "vue" },
 		}),
 		diagnostic.eslint_d.with({
 			-- disabled_filetypes = { "vue" },
