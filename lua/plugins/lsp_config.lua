@@ -17,7 +17,7 @@ require("nvim-lsp-installer").setup({
 })
 
 local keymaps = require("keymaps/lsp_keymaps")
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local enable_capabilities = function(client, formatting, diagnostic, rangformatting)
 	if vim.fn.has("nvim-0.8") == 1 then
