@@ -5,14 +5,14 @@ local servers = {
 	"jsonls",
 	"intelephense",
 	"html",
-	"stylelint_lsp",
 	"emmet_ls",
 	"sumneko_lua",
 	"tsserver",
 	"volar",
+	"cssls",
 }
 
-require("nvim-lsp-installer").setup({
+require("mason-lspconfig").setup({
 	ensure_installed = servers,
 })
 
@@ -40,6 +40,8 @@ local ts_config = function(client)
 			6133, --is declared but its value is never read
 			1109, --Expression expected.
 			1155, -- 'const' declarations must be initialized.
+			1155, -- 'const' declarations must be initialized.
+			80001, -- File is a CommonJS module; it may be converted to an ES module
 		},
 	})
 	ts_utils.setup_client(client)
@@ -59,14 +61,17 @@ local on_attach = function(client, bufnr)
 		ts_config(client)
 	end
 	if client.name == "volar" then
-		enable_capabilities(client, true, true, true)
+		enable_capabilities(client, true, true, false)
 	end
 	if client.name == "sumneko_lua" then
 		enable_capabilities(client, false, true, false)
 	end
-	if client.name == "stylelint_lsp" then
+	if client.name == "cssls" then
 		enable_capabilities(client, true, true, true)
 	end
+	-- if client.name == "stylelint_lsp" then
+	-- 	enable_capabilities(client, true, true, true)
+	-- end
 	keymaps.set(bufnr)
 
 	vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
@@ -103,7 +108,7 @@ for _, server in ipairs(servers) do
 			stylelintplus = {
 				autoFixOnSave = true,
 				autoFixOnFormat = true,
-				-- configFile = "/home/jose/Config/.stylelintrc.json",
+				-- configFile = "/home/Jose/Personal/Configuraciones/linter/.stylelintrc.json",
 				-- see available options in stylelint-lsp documentation
 			},
 		}
@@ -113,7 +118,7 @@ for _, server in ipairs(servers) do
 		config.filetypes = { "vue" }
 		config.init_options = {
 			typescript = {
-				tsdk = "/home/jose/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib",
+				tsdk = "/home/Jose/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib",
 			},
 			languageFeatures = {
 				references = true,
@@ -153,6 +158,17 @@ for _, server in ipairs(servers) do
 			},
 		}
 	end
+	if server == "jsonls" then
+		config.settings = {
+			files = {
+				associations = {
+					myfile = {
+						json = "jsonc",
+					},
+				},
+			},
+		}
+	end
 	config.on_attach = on_attach
 	config.capabilities = capabilities
 	config.lsp_flag = lsp_flags
@@ -177,7 +193,7 @@ null_ls.setup({
 	debug = true,
 	sources = {
 		formatting.eslint_d.with({
-			disabled_filetypes = { "vue" },
+			-- disabled_filetypes = { "vue" },
 		}),
 		code_action.eslint_d.with({
 			-- disabled_filetypes = { "vue" },

@@ -15,3 +15,11 @@ require("trouble").setup({
 	-- or leave it empty to use the default settings
 	-- refer to the configuration section below
 })
+
+-- trouble/lua/init.lua
+-- function Trouble.close()
+--   if is_open() then
+--     view:close()
+--     vim.cmd([[ exec ':wincmd p']])
+--   end
+-- end
