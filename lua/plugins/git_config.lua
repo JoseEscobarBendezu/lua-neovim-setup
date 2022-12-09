@@ -41,8 +41,8 @@ require("gitsigns").setup({
 	},
 	keymaps = {
 		noremap = true,
-		["n <leader>p"] = '<cmd> lua require"gitsigns".preview_hunk()<CR>',
-		["n <leader>i"] = '<cmd> lua require"gitsigns".blame_line()<CR>',
+		["n <leader>gp"] = '<cmd> lua require"gitsigns".preview_hunk()<CR>',
+		["n <leader>gi"] = '<cmd> lua require"gitsigns".blame_line()<CR>',
 		["n ]c"] = { expr = true, "&diff ? '[c' : '<cmd> lua require\"gitsigns\".prev_hunk()<CR>'" },
 		["n [c"] = { expr = true, "&diff ? ']c' : '<cmd> lua require\"gitsigns\".next_hunk()<CR>'" },
 		-- ['n ghr'] = '<cmd> lua require"gitsigns".toggle_deleted()<CR>',
@@ -70,7 +70,7 @@ require("diffview").setup({
 			["<leader>ct"] = actions.conflict_choose("theirs"), -- Choose the THEIRS version of a conflict
 			["<leader>cb"] = actions.conflict_choose("base"), -- Choose the BASE version of a conflict
 			["<leader>ca"] = actions.conflict_choose("all"), -- Choose all the versions of a conflict
-			["dx"] = actions.conflict_choose("none"), -- Delete the conflict region
+			["<leader>dc"] = actions.conflict_choose("none"), -- Delete the conflict region
 		},
 	},
 	hooks = {

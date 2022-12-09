@@ -27,7 +27,7 @@ function! s:AskForConfirmation(message, command) abort
   endwhile
 endfunction
 
-noremap <leader>r :call <SID>AskForConfirmation('reset HEAD for this branch ',':Git reset HEAD~1')<CR>
+noremap <leader>re :call <SID>AskForConfirmation('reset HEAD for this branch ',':Git reset HEAD~1')<CR>
 
 noremap <leader>ps :call <SID>AskForConfirmation('push commit ',':Git push')<CR>
 ]])
@@ -45,7 +45,7 @@ function DiffviewToggle()
 	end
 end
 
-keymap("n", "<leader>gg", ":G<CR>", opts)
+keymap("n", "<leader>gs", ":G<CR>", opts)
 keymap("n", "<leader>up", ":Git push --set-upstream origin ", opts_show)
 
 keymap("n", "<leader>fe", ":Git fetch --all -p<CR>", opts)
@@ -56,3 +56,5 @@ keymap("n", "<leader>sp", ":Git stash pop<CR>", opts_show)
 
 keymap("n", "<leader>m", "<cmd> lua DiffviewToggle()<CR>", opts)
 keymap("n", "<leader>dh", ":DiffviewFileHistory<CR>", opts)
+keymap("n", "<leader>do", ":DiffviewOpen<CR>", opts)
+keymap("n", "<leader>dc", ":DiffviewClose<CR>", opts)

@@ -69,6 +69,9 @@ local on_attach = function(client, bufnr)
 	if client.name == "cssls" then
 		enable_capabilities(client, true, true, true)
 	end
+	if client.name == "intelephense" then
+		enable_capabilities(client, true, true, true)
+	end
 	-- if client.name == "stylelint_lsp" then
 	-- 	enable_capabilities(client, true, true, true)
 	-- end
