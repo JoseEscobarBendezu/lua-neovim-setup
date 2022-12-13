@@ -11,7 +11,7 @@ require("packer").startup(function(use)
 	use("wbthomason/packer.nvim") -- Package manager
 	use("lewis6991/impatient.nvim") -- Improve startup time for Neovim
 	use("easymotion/vim-easymotion") -- Vim motions on speed!
-	use("christoomey/vim-system-copy") -- system clipboard
+	-- use("christoomey/vim-system-copy") -- system clipboard
 	use("tpope/vim-fugitive") -- git commands
 
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
@@ -46,7 +46,6 @@ require("packer").startup(function(use)
 	use("kyazdani42/nvim-tree.lua")
 
 	use("neovim/nvim-lspconfig")
-	-- use("williamboman/nvim-lsp-installer")
 	use("williamboman/mason.nvim")
 	use("jayp0521/mason-null-ls.nvim")
 	use("williamboman/mason-lspconfig.nvim")

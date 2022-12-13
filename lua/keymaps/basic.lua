@@ -91,7 +91,7 @@ function! ReplaceIt()
   let replacement = input('Enter replacement: ')
   call inputrestore()
   echom ' ...'
-  let match = inputlist(['1. first match', '2. all current line', '3. all match in file'])
+  let match = inputlist(['1. first match', '2. all current line', '3. all match in file', '4. all match in file with confirmation'])
   if(match == 1)
     execute 's/'.search.'/'.replacement.'/'
   endif
@@ -100,6 +100,9 @@ function! ReplaceIt()
   endif
   if(match == 3)
     execute '%s/'.search.'/'.replacement.'/g'
+  endif
+  if(match == 4)
+    execute '%s/'.search.'/'.replacement.'/gc'
   endif
 endfunction
 

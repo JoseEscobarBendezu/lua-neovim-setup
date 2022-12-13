@@ -254,6 +254,11 @@ _G.packer_plugins = {
     path = "/home/Jose/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/home/Jose/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
+  },
   ["trouble.nvim"] = {
     loaded = true,
     path = "/home/Jose/.local/share/nvim/site/pack/packer/start/trouble.nvim",
@@ -273,11 +278,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/Jose/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
-  },
-  ["vim-system-copy"] = {
-    loaded = true,
-    path = "/home/Jose/.local/share/nvim/site/pack/packer/start/vim-system-copy",
-    url = "https://github.com/christoomey/vim-system-copy"
   },
   ["vim-vsnip-integ"] = {
     loaded = true,

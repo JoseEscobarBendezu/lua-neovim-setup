@@ -54,7 +54,7 @@ keymap("n", "<leader>pl", ":Git pull<CR>", opts_show)
 keymap("n", "<leader>ss", ":Git stash save<CR>", opts_show)
 keymap("n", "<leader>sp", ":Git stash pop<CR>", opts_show)
 
-keymap("n", "<leader>m", "<cmd> lua DiffviewToggle()<CR>", opts)
+-- keymap("n", "<leader>m", "<cmd> lua DiffviewToggle()<CR>", opts)
 keymap("n", "<leader>dh", ":DiffviewFileHistory<CR>", opts)
 keymap("n", "<leader>do", ":DiffviewOpen<CR>", opts)
 keymap("n", "<leader>dc", ":DiffviewClose<CR>", opts)
