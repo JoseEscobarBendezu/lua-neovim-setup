@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/home/Jose/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
-  ["DAPInstall.nvim"] = {
-    loaded = true,
-    path = "/home/Jose/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim",
-    url = "https://github.com/ttbug/DAPInstall.nvim"
-  },
   LuaSnip = {
     loaded = true,
     path = "/home/Jose/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -189,6 +184,11 @@ _G.packer_plugins = {
     path = "/home/Jose/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
     url = "https://github.com/rcarriga/nvim-dap-ui"
   },
+  ["nvim-dap-vscode-js"] = {
+    loaded = true,
+    path = "/home/Jose/.local/share/nvim/site/pack/packer/start/nvim-dap-vscode-js",
+    url = "https://github.com/mxsdev/nvim-dap-vscode-js"
+  },
   ["nvim-lsp-ts-utils"] = {
     loaded = true,
     path = "/home/Jose/.local/share/nvim/site/pack/packer/start/nvim-lsp-ts-utils",
@@ -283,6 +283,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/Jose/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ",
     url = "https://github.com/hrsh7th/vim-vsnip-integ"
+  },
+  ["vscode-js-debug"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/Jose/.local/share/nvim/site/pack/packer/opt/vscode-js-debug",
+    url = "https://github.com/microsoft/vscode-js-debug"
   }
 }
 

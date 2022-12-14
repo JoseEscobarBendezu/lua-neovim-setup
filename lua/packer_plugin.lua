@@ -46,11 +46,14 @@ require("packer").startup(function(use)
 	use("kyazdani42/nvim-tree.lua")
 
 	use("neovim/nvim-lspconfig")
-	use("williamboman/mason.nvim")
-	use("jayp0521/mason-null-ls.nvim")
-	use("williamboman/mason-lspconfig.nvim")
+
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("jose-elias-alvarez/nvim-lsp-ts-utils")
+
+	use("williamboman/mason.nvim")
+
+	use("jayp0521/mason-null-ls.nvim")
+	use("williamboman/mason-lspconfig.nvim")
 
 	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-nvim-lsp")
@@ -65,9 +68,16 @@ require("packer").startup(function(use)
 
 	use("lewis6991/gitsigns.nvim")
 
+	use({
+		"microsoft/vscode-js-debug",
+		opt = true,
+		run = "npm install --legacy-peer-deps && npm run compile",
+	})
+
 	use("mfussenegger/nvim-dap")
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	use("ttbug/DAPInstall.nvim")
+	use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
+	-- use("ttbug/DAPInstall.nvim")
 
 	use("folke/trouble.nvim")
 
