@@ -9,7 +9,6 @@ end
 
 require("packer").startup(function(use)
 	use("wbthomason/packer.nvim") -- Package manager
-	use("lewis6991/impatient.nvim") -- Improve startup time for Neovim
 	use("easymotion/vim-easymotion") -- Vim motions on speed!
 	use("tpope/vim-fugitive") -- git commands
 
