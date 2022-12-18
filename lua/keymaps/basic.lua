@@ -1,38 +1,17 @@
-local keymap = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
+local keymaps = require("configurations.keymaps")
+local utils = require("configurations.utils")
 
-keymap("n", "<C-q>", "<nop>", opts)
-keymap("n", "<C-z>", "<nop>", opts)
-keymap("n", "<C-c>", "<nop>", opts)
-keymap("n", "<F1>", "<nop>", opts)
-keymap("n", "<F11>", "<nop>", opts)
-keymap("n", "`", "<nop>", opts)
-keymap("n", "``", "<nop>", opts)
-keymap("n", "K", "<nop>", opts)
-keymap("n", "zz", "<nop>", opts)
-keymap("n", "gt", "<nop>", opts)
-keymap("n", "gT", "<nop>", opts)
-keymap("n", "<C-w>v", "<nop>", opts)
-keymap("n", "<C-w>s", "<nop>", opts)
-keymap("n", "<C-w>T", "<nop>", opts)
-keymap("n", "M", "<nop>", opts)
-keymap("n", "U", "<nop>", opts)
-keymap("n", "q", "<nop>", opts)
-keymap("n", "Q", "<nop>", opts)
-keymap("n", "w", "<nop>", opts)
-keymap("n", "0", "<nop>", opts)
-keymap("n", "r", "<nop>", opts)
-keymap("n", "<C-r>", "<nop>", opts)
--- keymap("n", "<C-w>", "<nop>", opts)
-keymap("n", "<C-e>", "<nop>", opts)
-keymap("n", "<C-y>", "<nop>", opts)
-keymap("n", "<C-t>", "<nop>", opts)
-keymap("t", "<C-t>", "<nop>", opts)
-keymap("n", "<leader>q", "<nop>", opts)
-keymap("n", "<leader>d", "<nop>", opts)
-keymap("n", "<leader>dd", "<nop>", opts)
-keymap("n", "[[", "<nop>", opts)
-keymap("n", "]]", "<nop>", opts)
+--delete default keymaps
+local delete_default = keymaps.delete_default
+utils.delete_keymap_config(delete_default)
+
+--basic config managment keymaps
+local basic = keymaps.basic
+utils.set_keymap_config(basic)
+
+--view panels managment keymaps
+local view_panels_control = keymaps.view_panels_control
+utils.set_keymap_config(view_panels_control)
 
 vim.cmd([[
 
@@ -163,22 +142,5 @@ endfunction
 nnoremap <A-f> :call FindAll()<cr>
 ]])
 
-local opts = { noremap = true, silent = true }
-local opts_show = { noremap = true, silent = false }
-local keymap = vim.api.nvim_set_keymap
-
--- keymap("n", "q", vim.api.nvim_call_function("close_window()"), opts)
-keymap("n", "r", "<C-r>", opts)
-keymap("n", "w", ":w<CR>", opts)
--- keymap("n", "m", ":q<CR>", opts)
-
-keymap("i", "<C-q>", "<Esc>", opts)
-keymap("i", "<C-l>", "<Right>", opts)
-keymap("i", "<C-h>", "<Left>", opts)
-keymap("i", "<C-k>", "<Up>", opts)
-keymap("i", "<C-j>", "<Down>", opts)
-
-keymap("n", "<leader>e", "<Plug>(easymotion-overwin-f2)", opts)
--- keymap("n", "<A-p>", ":wincmd p<CR>", opts)
--- keymap("n", "<C-m>", "<Plug>MarkdownPreviewToggle<cr>", opts_show)
-keymap("n", "Q", ":%bd|e#|bd#<cr>|'\"", opts_show)
+-- verife this code:
+-- return vim.api.nvim_list_bufs()

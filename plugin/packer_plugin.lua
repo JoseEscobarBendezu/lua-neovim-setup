@@ -9,6 +9,9 @@ end
 
 require("packer").startup(function(use)
 	use("wbthomason/packer.nvim") -- Package manager
+	use("lewis6991/impatient.nvim")
+	use("nathom/filetype.nvim")
+	use("nvim-lua/plenary.nvim")
 	use("easymotion/vim-easymotion") -- Vim motions on speed!
 	use("tpope/vim-fugitive") -- git commands
 
@@ -25,9 +28,9 @@ require("packer").startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
+	use({ "windwp/nvim-ts-autotag" })
 	use("JoosepAlviste/nvim-ts-context-commentstring") -- Context comment in html css and js for template-string treesitter
 	use("windwp/nvim-autopairs") -- Autopairs ({['`
-	use({ "windwp/nvim-ts-autotag", requires = { { "nvim-treesitter/nvim-treesitter" } } })
 	use("p00f/nvim-ts-rainbow")
 
 	use({
@@ -39,9 +42,9 @@ require("packer").startup(function(use)
 		"nvim-telescope/telescope-fzf-native.nvim",
 		run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	})
+	use("nvim-telescope/telescope-file-browser.nvim")
 
 	use("kyazdani42/nvim-web-devicons")
-	use("kyazdani42/nvim-tree.lua")
 
 	use("neovim/nvim-lspconfig")
 
@@ -55,14 +58,10 @@ require("packer").startup(function(use)
 
 	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-nvim-lsp-signature-help")
 	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-buffer")
 	use("saadparwaiz1/cmp_luasnip") -- Snippets source for nvim-cmp
 	use("L3MON4D3/LuaSnip") -- Snippets plugin
-
-	use("lukas-reineke/cmp-rg")
-	use("hrsh7th/vim-vsnip-integ")
-	use("ray-x/lsp_signature.nvim")
 
 	use("lewis6991/gitsigns.nvim")
 

@@ -85,6 +85,25 @@ require("onenord").setup({
 	},
 })
 
+-- require("gruvbox").setup({
+-- 	undercurl = true,
+-- 	underline = true,
+-- 	bold = true,
+-- 	italic = true,
+-- 	strikethrough = true,
+-- 	invert_selection = false,
+-- 	invert_signs = false,
+-- 	invert_tabline = false,
+-- 	invert_intend_guides = false,
+-- 	inverse = true, -- invert background for search, diffs, statuslines and errors
+-- 	contrast = "", -- can be "hard", "soft" or empty string
+-- 	palette_overrides = {},
+-- 	overrides = {},
+-- 	dim_inactive = false,
+-- 	transparent_mode = false,
+-- })
+-- vim.cmd("colorscheme gruvbox")
+
 vim.opt.termguicolors = true
 vim.api.nvim_set_hl(0, "IndentBlanklineIndent1", { fg = "#76393E", nocombine = true })
 vim.api.nvim_set_hl(0, "IndentBlanklineIndent2", { fg = "#6f5d3c", nocombine = true })
@@ -127,7 +146,7 @@ vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { fg = "#C1866B" })
 vim.api.nvim_set_hl(0, "DiffText", { bg = "black", fg = "#C1866B", bold = true, underline = false })
 
 vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#292e39", bg = "#292e39" })
-vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { fg = "#292e39", bg = "#292e39" })
+vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { fg = "#d9d9d9", bg = "#292e39" })
 vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = "#2e3440", bg = "#88C0D0", bold = true })
 
 vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#3b4252", bg = "#3b4252" })

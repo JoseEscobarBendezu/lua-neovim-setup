@@ -1,5 +1,6 @@
-require("keymaps/basic")
-require("keymaps/views")
+require("impatient")
+require("filetype")
+require("keymaps.basic")
 require("keymaps/sidebars")
 require("keymaps/telescope")
 require("keymaps/git_keymaps")

@@ -32,18 +32,19 @@ noremap <leader>re :call <SID>AskForConfirmation('reset HEAD for this branch ','
 noremap <leader>ps :call <SID>AskForConfirmation('push commit ',':Git push')<CR>
 ]])
 
-function DiffviewToggle()
-	local lib = require("diffview.lib")
-	local view = lib.get_current_view()
-	if view then
-		-- Current tabpage is a Diffview; close it
-		vim.cmd(":DiffviewClose")
-		require("indent_blankline.commands").enable()
-	else
-		-- No open Diffview exists: open a new one
-		vim.cmd(":DiffviewOpen")
-	end
-end
+-- function DiffviewToggle()
+-- 	local lib = require("diffview.lib")
+-- 	local view = lib.get_current_view()
+-- 	if view then
+-- 		-- Current tabpage is a Diffview; close it
+-- 		vim.cmd(":DiffviewClose")
+-- 		require("indent_blankline.commands").enable()
+-- 	else
+-- 		-- No open Diffview exists: open a new one
+-- 		vim.cmd(":DiffviewOpen")
+-- 	end
+-- end
+-- keymap("n", "<C-d>", "<cmd> lua DiffviewToggle()<CR>", opts)
 
 keymap("n", "<leader>gs", ":G<CR>", opts)
 keymap("n", "<leader>up", ":Git push --set-upstream origin ", opts_show)
@@ -54,7 +55,6 @@ keymap("n", "<leader>pl", ":Git pull<CR>", opts_show)
 keymap("n", "<leader>ss", ":Git stash save<CR>", opts_show)
 keymap("n", "<leader>sp", ":Git stash pop<CR>", opts_show)
 
--- keymap("n", "<leader>m", "<cmd> lua DiffviewToggle()<CR>", opts)
 keymap("n", "<leader>dh", ":DiffviewFileHistory<CR>", opts)
 keymap("n", "<leader>do", ":DiffviewOpen<CR>", opts)
 keymap("n", "<leader>dc", ":DiffviewClose<CR>", opts)

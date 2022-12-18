@@ -2,28 +2,6 @@ local telescope = require("telescope")
 
 vim.g.theme_switcher_loaded = true
 
--- local open_in_nvim_tree = function(prompt_bufnr)
---   local action_state = require "telescope.actions.state"
---   local Path = require "plenary.path"
---   local actions = require "telescope.actions"
---
---   local entry = action_state.get_selected_entry()[1]
---   local entry_path = Path:new(entry):parent():absolute()
---   actions._close(prompt_bufnr, true)
---   entry_path = Path:new(entry):parent():absolute()
---   entry_path = entry_path:gsub("\\", "\\\\")
---
---   vim.cmd("NvimTreeClose")
---   vim.cmd("NvimTreeOpen " .. entry_path)
---
---   local file_name = nil
---   for s in string.gmatch(entry, "[^/]+") do
---       file_name = s
---   end
---
---   vim.cmd("/" .. file_name)
--- end
-
 telescope.setup({
 	picker = {
 		hidden = false,
@@ -32,11 +10,9 @@ telescope.setup({
 		mappings = {
 			i = {
 				["<C-q>"] = require("telescope.actions").close,
-				-- ["<C-s>"] = open_in_nvim_tree,
 			},
 			n = {
 				["<C-q>"] = require("telescope.actions").close,
-				-- ["<c-s>"] = open_in_nvim_tree,
 			},
 		},
 		vimgrep_arguments = {
@@ -48,7 +24,10 @@ telescope.setup({
 			"--column",
 			"--smart-case",
 		},
-		prompt_prefix = "  ",
+		preview = {
+			-- treesitter = false,
+		},
+		prompt_prefix = " 🔍 ",
 		selection_caret = "  ",
 		entry_prefix = "  ",
 		initial_mode = "insert",
@@ -81,6 +60,9 @@ telescope.setup({
 		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+		-- file_previewer = require("telescope.previewers").cat.new,
+		-- grep_previewer = require("telescope.previewers").vimgrep.new,
+		-- qflist_previewer = require("telescope.previewers").qflist.new,
 		buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 		results_title = "",
 	},
@@ -92,7 +74,21 @@ telescope.setup({
 			case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 			-- the default case_mode is "smart_case"
 		},
+		file_browser = {
+			hijack_netrw = true,
+			mappings = {
+				["i"] = {
+					-- your custom insert mode mappings
+				},
+				["n"] = {
+					-- your custom normal mode mappings
+				},
+			},
+		},
 	},
 })
 
 -- https://github.com/nvim-telescope/telescope.nvim/pull/1653
+
+require("telescope").load_extension("fzf")
+require("telescope").load_extension("file_browser")

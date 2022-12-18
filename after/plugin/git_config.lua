@@ -70,7 +70,7 @@ require("diffview").setup({
 			["<leader>ct"] = actions.conflict_choose("theirs"), -- Choose the THEIRS version of a conflict
 			["<leader>cb"] = actions.conflict_choose("base"), -- Choose the BASE version of a conflict
 			["<leader>ca"] = actions.conflict_choose("all"), -- Choose all the versions of a conflict
-			["<leader>dc"] = actions.conflict_choose("none"), -- Delete the conflict region
+			["<leader>dn"] = actions.conflict_choose("none"), -- Delete the conflict region
 		},
 	},
 	hooks = {
@@ -82,6 +82,10 @@ require("diffview").setup({
 
 			-- Disable indentation guides
 			require("indent_blankline.commands").disable()
+		end,
+		view_closed = function()
+			-- Enable indentation guides when close diffview
+			require("indent_blankline.commands").enable()
 		end,
 	},
 })

@@ -1,3 +1,8 @@
+local nvim_tree_status_ok, nvim_tree = pcall(require, "nvim-tree")
+if not nvim_tree_status_ok then
+	return
+end
+
 local nvim_tree_icons = {
 	default = "",
 	symlink = "",
@@ -53,7 +58,7 @@ local list = {
 	{ key = "i", action = "toggle_file_info" },
 }
 
-require("nvim-tree").setup({
+nvim_tree.setup({
 	disable_netrw = true,
 	hijack_netrw = true,
 	open_on_setup = true,

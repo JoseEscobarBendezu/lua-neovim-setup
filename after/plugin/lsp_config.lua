@@ -99,6 +99,9 @@ for _, server in ipairs(servers) do
 				diagnostics = {
 					globals = { "vim" },
 				},
+				workspace = {
+					checkThirdParty = false,
+				},
 			},
 		}
 	end

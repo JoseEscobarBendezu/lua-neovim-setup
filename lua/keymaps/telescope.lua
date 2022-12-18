@@ -1,7 +1,8 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 
-keymap("n", "<C-f>", "<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>", opts)
+keymap("n", "<C-p>", "<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>", opts)
+keymap("n", "<C-f>", "<cmd>Telescope file_browser<CR>", opts)
 keymap("n", "<C-l>", "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>", opts)
 keymap("n", "<C-r>", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", opts)
 -- keymap("n", "<C-p>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
