@@ -8,5 +8,6 @@ keymap("n", "<C-r>", "<cmd>lua require('telescope.builtin').lsp_references()<CR>
 -- keymap("n", "<C-p>", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
 keymap("n", "<C-b>", ":Telescope git_branches<CR>", opts)
 keymap("n", "<C-s>", ":Telescope git_stash<CR>", opts)
+keymap("n", "<C-m>", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
 -- keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers({hidden = true})<CR> ", opts)
 -- keymap('n', '<leader>h', "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts)

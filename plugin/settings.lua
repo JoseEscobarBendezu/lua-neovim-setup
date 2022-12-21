@@ -19,7 +19,6 @@ opt.sw = 2 --Indent space
 opt.tabstop = 2 --Space equals Tabs
 opt.showtabline = 2 --Show tabas ever
 opt.undofile = true -- Save undo history
--- opt.undodir=vim.fn.stdpath('config') .. '/.undo'            --Created undodir
 opt.splitright = true --Split open rigth
 opt.splitbelow = true --Split open bottom
 -- opt.paste = true

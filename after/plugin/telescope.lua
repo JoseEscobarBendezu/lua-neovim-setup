@@ -1,5 +1,12 @@
 local telescope = require("telescope")
 
+local utils = require("configurations.utils")
+local keymaps = require("configurations.keymaps")
+
+--delete default keymaps
+local telescope_keymaps = keymaps.telescope
+utils.set_keymap_config(telescope_keymaps)
+
 vim.g.theme_switcher_loaded = true
 
 telescope.setup({

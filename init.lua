@@ -1,8 +1,5 @@
 require("impatient")
 require("filetype")
 require("keymaps.basic")
-require("keymaps/sidebars")
-require("keymaps/telescope")
-require("keymaps/git_keymaps")
 require("keymaps/terminal")
 require("keymaps/dap")

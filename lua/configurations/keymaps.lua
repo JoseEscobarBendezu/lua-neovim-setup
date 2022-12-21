@@ -2,6 +2,8 @@ local keymaps = {}
 
 keymaps.delete_default = {
 	["n"] = {
+		"p",
+		"n",
 		"<C-q>",
 		"<C-z>",
 		"<C-c>",
@@ -11,6 +13,7 @@ keymaps.delete_default = {
 		"``",
 		"K",
 		"zz",
+		"go",
 		"gt",
 		"gT",
 		"<C-w>v",
@@ -31,6 +34,8 @@ keymaps.delete_default = {
 		"<leader>dd",
 		"[[",
 		"]]",
+		"<F1>",
+		"e",
 	},
 	["t"] = {
 		"<C-t>",
@@ -39,6 +44,7 @@ keymaps.delete_default = {
 
 keymaps.basic = {
 	["n"] = {
+		["pp"] = "]p",
 		["r"] = "<C-r>",
 		["w"] = ":w<CR>",
 		["f"] = "<Plug>(easymotion-overwin-f2)",
@@ -46,18 +52,16 @@ keymaps.basic = {
 	},
 	["i"] = {
 		["<C-q>"] = "<Esc>",
-		["<C-l>"] = "<Right>",
-		["<C-h>"] = "<Left>",
-		["<C-k>"] = "<Up>",
-		["<C-j>"] = "<Down>",
+		["<A-l>"] = "<Right>",
+		["<A-h>"] = "<Left>",
+		["<A-k>"] = "<Up>",
+		["<A-j>"] = "<Down>",
 	},
 }
 
 keymaps.view_panels_control = {
 	["n"] = {
 
-		["<F1>"] = "<C-e>",
-		["<F2>"] = "<C-y>",
 		["<F3>"] = "zz",
 		["<F4>"] = "M",
 
@@ -65,8 +69,11 @@ keymaps.view_panels_control = {
 		["<F6>"] = "<C-w>s",
 		["<F7>"] = "<C-w>T",
 
-		["<F9>"] = "<C-f>",
-		["<F10>"] = "<C-b>",
+		["<F9>"] = "<C-e>",
+		["<F10>"] = "<C-y>",
+
+		["<A-n>"] = "<C-f>",
+		["<A-p>"] = "<C-b>",
 
 		["<A-h>"] = "<C-w>h",
 		["<A-j>"] = "<C-w>j",
@@ -119,5 +126,41 @@ keymaps.view_panels_control = {
 		["\\9"] = "9gt",
 	},
 }
+
+keymaps.sidebars = {
+	["n"] = {
+		-- ["e"] = ":TroubleToggle<CR>",
+		-- keymap("n", "<C-d>", ":NvimTreeToggle<CR>", opts)
+	},
+}
+
+keymaps.telescope = {
+	["n"] = {
+		["<C-p>"] = "<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",
+		["<C-f>"] = "<cmd>Telescope file_browser<CR>",
+		["<C-l>"] = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>",
+		["<C-r>"] = "<cmd>lua require('telescope.builtin').lsp_references()<CR>",
+		["<C-b>"] = ":Telescope git_branches<CR>",
+		["<C-s>"] = ":Telescope git_stash<CR>",
+		["<C-m>"] = "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>",
+		["<C-e>"] = "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
+	},
+}
+
+keymaps.git_diff = {
+	["n"] = {
+		["<leader>gs"] = ":G<CR>",
+		["<leader>up"] = ":Git push --set-upstream origin ",
+		["<leader>fe"] = ":Git fetch --all -p<CR>",
+		["<leader>pl"] = ":Git pull<CR>",
+		["<leader>ss"] = ":Git stash save<CR>",
+		["<leader>sp"] = ":Git stash pop<CR>",
+		["<leader>dh"] = ":DiffviewFileHistory<CR>",
+		["<leader>do"] = ":DiffviewOpen<CR>",
+		["<leader>dc"] = ":DiffviewClose<CR>",
+	},
+}
+
+keymaps.dap = {}
 
 return keymaps

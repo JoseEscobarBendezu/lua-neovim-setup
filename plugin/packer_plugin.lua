@@ -69,8 +69,6 @@ require("packer").startup(function(use)
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 	use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
 
-	use("folke/trouble.nvim")
-
 	use({
 		"iamcco/markdown-preview.nvim",
 		run = function()

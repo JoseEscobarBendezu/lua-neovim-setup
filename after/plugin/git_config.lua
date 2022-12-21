@@ -1,3 +1,10 @@
+local keymaps = require("configurations.keymaps")
+local utils = require("configurations.utils")
+
+-- git_diff keymaps
+local git_diff = keymaps.git_diff
+utils.set_keymap_config(git_diff)
+
 require("gitsigns").setup({
 	signs = {
 		add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
@@ -43,14 +50,14 @@ require("gitsigns").setup({
 		noremap = true,
 		["n <leader>gp"] = '<cmd> lua require"gitsigns".preview_hunk()<CR>',
 		["n <leader>gi"] = '<cmd> lua require"gitsigns".blame_line()<CR>',
-		["n ]c"] = { expr = true, "&diff ? '[c' : '<cmd> lua require\"gitsigns\".prev_hunk()<CR>'" },
-		["n [c"] = { expr = true, "&diff ? ']c' : '<cmd> lua require\"gitsigns\".next_hunk()<CR>'" },
+		["n pc"] = { expr = true, "&diff ? '[c' : '<cmd> lua require\"gitsigns\".prev_hunk()<CR>'" },
+		["n nc"] = { expr = true, "&diff ? ']c' : '<cmd> lua require\"gitsigns\".next_hunk()<CR>'" },
 		-- ['n ghr'] = '<cmd> lua require"gitsigns".toggle_deleted()<CR>',
 	},
 })
 
-vim.cmd([[nnoremap <expr> [c &diff ? ']c' : '[c']])
-vim.cmd([[nnoremap <expr> ]c &diff ? '[c' : ']c']])
+vim.cmd([[nnoremap <expr> nc &diff ? ']c' : '[c']])
+vim.cmd([[nnoremap <expr> pc &diff ? '[c' : ']c']])
 
 vim.cmd([[nnoremap <expr> [\[ &diff ? '<nop>' : '[\[' ]])
 vim.cmd([[nnoremap <expr> ]\] &diff ? '<nop>' : ']\]' ]])

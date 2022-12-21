@@ -21,6 +21,7 @@ require("nvim-treesitter.configs").setup({
 		"graphql",
 		"javascript",
 	},
+	ignore_install = { "" },
 	highlight = { enable = true },
 	indent = { enable = true },
 	context_commentstring = { enable = true },
