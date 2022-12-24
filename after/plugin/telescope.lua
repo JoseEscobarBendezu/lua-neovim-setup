@@ -17,10 +17,22 @@ telescope.setup({
 		mappings = {
 			i = {
 				["<C-q>"] = require("telescope.actions").close,
+				["<A-n>"] = require("telescope.actions").preview_scrolling_down,
+				["<A-p>"] = require("telescope.actions").preview_scrolling_up,
 			},
 			n = {
 				["<C-q>"] = require("telescope.actions").close,
+				["<A-n>"] = require("telescope.actions").preview_scrolling_down,
+				["<A-p>"] = require("telescope.actions").preview_scrolling_up,
 			},
+			-- - `<cr>`: checks out the currently selected branch
+			-- - `<C-t>`: tracks currently selected branch
+			-- - `<C-r>`: rebases currently selected branch
+			-- - `<C-a>`: creates a new branch, with confirmation prompt before creation
+			-- - `<C-d>`: deletes the currently selected branch, with confirmation
+			--   prompt before deletion
+			-- - `<C-y>`: merges the currently selected branch, with confirmation prompt
+			--   before deletion
 		},
 		vimgrep_arguments = {
 			"rg",

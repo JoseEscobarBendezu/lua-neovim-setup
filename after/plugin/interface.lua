@@ -33,7 +33,7 @@ require("lualine").setup({
 				mode = 2,
 				-- 1: Shows buffer index
 				-- 2: Shows buffer name + buffer index
-				max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+				-- max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
 				-- it can also be a function that returns
 				-- the value of `max_length` dynamically.
 				filetype_names = {
@@ -63,27 +63,47 @@ require("lualine").setup({
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {
-			{
-				"tabs",
-				max_length = vim.o.columns / 3,
-				mode = 0,
-			},
+			-- 	{
+			-- 		"tabs",
+			-- 		max_length = vim.o.columns / 3,
+			-- 		mode = 0,
+			-- 	},
 		},
 	},
-	extensions = { "nvim-tree" },
 })
 
-require("onenord").setup({
-	fade_nc = true,
-	styles = {
-		comments = "italic",
-		strings = "NONE",
-		keywords = "bold",
-		functions = "NONE",
-		variables = "NONE",
-		diagnostics = "NONE",
-	},
+require("kanagawa").setup({
+	undercurl = true, -- enable undercurls
+	commentStyle = { italic = true },
+	functionStyle = {},
+	keywordStyle = { italic = true },
+	statementStyle = { bold = true },
+	typeStyle = {},
+	variablebuiltinStyle = { italic = true },
+	specialReturn = true, -- special highlight for the return keyword
+	specialException = true, -- special highlight for exception handling keywords
+	transparent = false, -- do not set background color
+	dimInactive = true, -- dim inactive window `:h hl-NormalNC`
+	globalStatus = false, -- adjust window separators highlight for laststatus=3
+	terminalColors = true, -- define vim.g.terminal_color_{0,17}
+	colors = {},
+	overrides = {},
+	theme = "default", -- Load "default" theme or the experimental "light" theme
 })
+
+vim.cmd("colorscheme kanagawa")
+
+-- require("onenord").setup({
+-- 	fade_nc = true,
+-- 	styles = {
+-- 		comments = "italic",
+-- 		strings = "NONE",
+-- 		keywords = "bold",
+-- 		functions = "NONE",
+-- 		variables = "NONE",
+-- 		diagnostics = "NONE",
+-- 	},
+-- })
 
 -- require("gruvbox").setup({
 -- 	undercurl = true,
@@ -143,35 +163,42 @@ require("indent_blankline").setup({
 
 vim.api.nvim_set_hl(0, "IndentBlanklineContextStart", { underline = false })
 vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { fg = "#C1866B" })
+
 vim.api.nvim_set_hl(0, "DiffText", { bg = "black", fg = "#C1866B", bold = true, underline = false })
 
-vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#292e39", bg = "#292e39" })
-vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { fg = "#d9d9d9", bg = "#292e39" })
+-- kanagawa theme telescope
+vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#1f1f28", bg = "#1f1f28" })
+vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = "#1f1f28" })
 vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = "#2e3440", bg = "#88C0D0", bold = true })
 
-vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#3b4252", bg = "#3b4252" })
-vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "#3b4252", fg = "#C8D0E0" })
+vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#2a2a37", bg = "#2a2a37" })
+vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "#2a2a37" })
 vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = "#2e3440", bg = "#ebcb8b", bold = true })
 
-vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#2e333f", bg = "#2e3440" })
-vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "#2e333f", fg = "#C8D0E0" })
+vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#272734", bg = "#272734" })
+vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "#272734" })
 
-vim.api.nvim_set_hl(0, "lualine_a_buffers_active", { bg = "#2E3440", fg = "#9fa5b3", bold = true })
+-- vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = "#272734", bg = "#272734" })
+vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = "#363646" })
+vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#fa9f66", bold = true })
 
-vim.api.nvim_set_hl(0, "TabLine", { cterm = underline, ctermfg = 15, ctermbg = 242, fg = "#6C7A96", bg = "red" })
-vim.api.nvim_set_hl(0, "TabLineFill", { cterm = reverse, fg = "#6C7A96", bg = "red" })
+-- kanagawa theme bufferline
+vim.api.nvim_set_hl(0, "lualine_a_buffers_active", { bg = "#1e1f28", bold = true })
 
-vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = "NONE", strikethrough = true, fg = "#808080" })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#569CD6" })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { bg = "NONE", fg = "#569CD6" })
-vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindInterface", { bg = "NONE", fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindText", { bg = "NONE", fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE", fg = "#C586C0" })
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", { bg = "NONE", fg = "#C586C0" })
-vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
-vim.api.nvim_set_hl(0, "CmpItemKindProperty", { bg = "NONE", fg = "#D4D4D4" })
-vim.api.nvim_set_hl(0, "CmpItemKindUnit", { bg = "NONE", fg = "#D4D4D4" })
+-- onenord theme telescope
+-- vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#292e39", bg = "#292e39" })
+-- vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = "#292e39" })
+-- vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = "#2e3440", bg = "#88C0D0", bold = true })
+--
+-- vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#3b4252", bg = "#3b4252" })
+-- vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "#3b4252" })
+-- vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = "#2e3440", bg = "#ebcb8b", bold = true })
+--
+-- vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#2e3440", bg = "#2e3440" })
+-- vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "#2e333f" })
+
+-- onenord theme bufferline
+-- vim.api.nvim_set_hl(0, "lualine_a_buffers_active", { bg = "#2E3440", fg = "#9fa5b3", bold = true })
 
 vim.fn.sign_define(
 	"DiagnosticSignError",
@@ -198,9 +225,19 @@ vim.api.nvim_set_hl(0, "DiagnosticLineNrWarn", { bg = "#51412A", fg = "#FFA500",
 vim.api.nvim_set_hl(0, "DiagnosticLineNrInfo", { bg = "#1E535D", fg = "#00FFFF", bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticLineNrHint", { bg = "#1E205D", fg = "#0000FF", bold = true })
 
-vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = "NONE", gui = strikethrough, fg = "#808080" })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#569CD6" })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { bg = "NONE", fg = "#569CD6" })
+-- kanagawa cmp theme
+vim.cmd([[hi Pmenu guibg=#16161d]])
+vim.cmd([[hi PmenuSel guibg=#2a2a37]])
+
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#fa9f66", bold = true })
+vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { gui = strikethrough, fg = "#808080" })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = "#fa9f66" })
+
+-- onenord cmp theme
+-- vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#569CD6" })
+-- vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = "NONE", gui = strikethrough, fg = "#808080" })
+-- vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { bg = "NONE", fg = "#569CD6" })
+
 vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
 vim.api.nvim_set_hl(0, "CmpItemKindInterface", { bg = "NONE", fg = "#9CDCFE" })
 vim.api.nvim_set_hl(0, "CmpItemKindText", { bg = "NONE", fg = "#9CDCFE" })

@@ -21,6 +21,7 @@ require("packer").startup(function(use)
 	use("numToStr/Comment.nvim")
 
 	use("nvim-lualine/lualine.nvim") -- Status bar
+	use("rebelot/kanagawa.nvim")
 	use("rmehri01/onenord.nvim")
 	use("lukas-reineke/indent-blankline.nvim") -- Indent rainbow
 
@@ -68,6 +69,8 @@ require("packer").startup(function(use)
 	use("mfussenegger/nvim-dap")
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 	use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
+
+	-- use("ldelossa/nvim-ide")
 
 	use({
 		"iamcco/markdown-preview.nvim",

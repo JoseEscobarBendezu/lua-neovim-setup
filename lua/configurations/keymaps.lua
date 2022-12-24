@@ -5,6 +5,8 @@ keymaps.delete_default = {
 		"p",
 		"n",
 		"<C-q>",
+		"<C-i>",
+		"<C-w>",
 		"<C-z>",
 		"<C-c>",
 		"<F1>",
@@ -49,6 +51,7 @@ keymaps.basic = {
 		["w"] = ":w<CR>",
 		["f"] = "<Plug>(easymotion-overwin-f2)",
 		["Q"] = ":%bd|e#|bd#<cr>|'\"",
+		["<C-w>"] = "<C-i>",
 	},
 	["i"] = {
 		["<C-q>"] = "<Esc>",
@@ -142,7 +145,7 @@ keymaps.telescope = {
 		["<C-r>"] = "<cmd>lua require('telescope.builtin').lsp_references()<CR>",
 		["<C-b>"] = ":Telescope git_branches<CR>",
 		["<C-s>"] = ":Telescope git_stash<CR>",
-		["<C-m>"] = "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>",
+		["<C-i>"] = "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>",
 		["<C-e>"] = "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
 	},
 }

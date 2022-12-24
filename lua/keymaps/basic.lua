@@ -69,15 +69,15 @@ function s:close_window()
   let buffers = map(filter(copy(getbufinfo()), 'v:val.listed'), 'v:val.bufnr')
   let size_buffers = len(buffers)
 
-  if bufname("%") == "NvimTree_1" && size_buffers == 0
-    exec ':quitall'
-    return
-  endif
-
-  if bufname("%") == "NvimTree_1" && size_buffers == 1
-    exec ':NvimTreeClose'
-    return
-  endif
+  "if bufname("%") == "NvimTree_1" && size_buffers == 0
+  "  exec ':quitall'
+  "  return
+  "endif
+  "
+  "if bufname("%") == "NvimTree_1" && size_buffers == 1
+  "  exec ':NvimTreeClose'
+  "  return
+  "endif
 
   if size_buffers == 1
     "no hay mas buffers
@@ -86,14 +86,14 @@ function s:close_window()
   endif
 
   "hay mas buffers
-  if win_screenpos("%") == [2,42]
-    "nvimtree is open
-    exec ':NvimTreeClose'
-    exec ':bdelete'
-    exec ':NvimTreeOpen'
-    exec ':wincmd l'
-    return
-  endif
+  "if win_screenpos("%") == [2,42]
+  "  "nvimtree is open
+  "  exec ':NvimTreeClose'
+  "  exec ':bdelete'
+  "  exec ':NvimTreeOpen'
+  "  exec ':wincmd l'
+  "  return
+  "endif
   
   exec ':bdelete'
   return
