@@ -3,7 +3,7 @@ local telescope = require("telescope")
 local utils = require("configurations.utils")
 local keymaps = require("configurations.keymaps")
 
---delete default keymaps
+--telescope keymaps
 local telescope_keymaps = keymaps.telescope
 utils.set_keymap_config(telescope_keymaps)
 

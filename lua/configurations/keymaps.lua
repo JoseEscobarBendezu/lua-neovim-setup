@@ -164,6 +164,16 @@ keymaps.git_diff = {
 	},
 }
 
-keymaps.dap = {}
+keymaps.dap = {
+	["n"] = {
+		["<leader><F1>"] = '<cmd>lua require"dap".continue()<CR>',
+		["<leader><F2>"] = '<cmd>lua require"dap".step_over()<CR>',
+		["<leader><F3>"] = '<cmd>lua require"dap".step_into()<CR>',
+		["<leader><F4>"] = '<cmd>lua require"dap".step_out()<CR>',
+		["<leader><F6>"] = '<cmd>lua require"dap.ui.widgets".hover()<CR>',
+		["<leader><F9>"] = "<cmd>lua require'dapui'.toggle()<CR>",
+		["<leader><F5>"] = '<cmd>lua require"dapui".toggle()<CR><cmd>lua require"dap".toggle_breakpoint()<CR><cmd>lua require"dapui".toggle()<CR>',
+	},
+}
 
 return keymaps

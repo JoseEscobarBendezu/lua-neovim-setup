@@ -8,6 +8,13 @@ if not dap_ui_status_ok then
 	return
 end
 
+local utils = require("configurations.utils")
+local keymaps = require("configurations.keymaps")
+
+--dap keymaps
+local dap_keymaps = keymaps.dap
+utils.set_keymap_config(dap_keymaps)
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "dap-repl",
 	callback = function(args)

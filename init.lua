@@ -1,5 +1,3 @@
 require("impatient")
 require("filetype")
 require("keymaps.basic")
-require("keymaps/terminal")
-require("keymaps/dap")
