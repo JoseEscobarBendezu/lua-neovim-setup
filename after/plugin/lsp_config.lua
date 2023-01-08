@@ -10,6 +10,7 @@ local servers = {
 	"tsserver",
 	"volar",
 	"cssls",
+	"tailwindcss",
 }
 
 require("mason-lspconfig").setup({
@@ -42,6 +43,7 @@ local ts_config = function(client)
 			1155, -- 'const' declarations must be initialized.
 			1155, -- 'const' declarations must be initialized.
 			80001, -- File is a CommonJS module; it may be converted to an ES module
+			2307, -- Cannot find module '{0}' or its corresponding type declarations. for vue
 		},
 	})
 	ts_utils.setup_client(client)
@@ -61,16 +63,19 @@ local on_attach = function(client, bufnr)
 		ts_config(client)
 	end
 	if client.name == "volar" then
-		enable_capabilities(client, true, true, false)
-	end
-	if client.name == "sumneko_lua" then
 		enable_capabilities(client, false, true, false)
 	end
+	if client.name == "sumneko_lua" then
+		enable_capabilities(client, true, true, false)
+	end
 	if client.name == "cssls" then
-		enable_capabilities(client, true, true, true)
+		enable_capabilities(client, false, false, false)
 	end
 	if client.name == "intelephense" then
 		enable_capabilities(client, true, true, true)
+	end
+	if client.name == "html" then
+		enable_capabilities(client, false, true, false)
 	end
 	-- if client.name == "stylelint_lsp" then
 	-- 	enable_capabilities(client, true, true, true)
@@ -109,7 +114,7 @@ for _, server in ipairs(servers) do
 		config.filetypes = { "html" }
 	end
 	if server == "stylelint_lsp" then
-		config.filetypes = { "css" }
+		config.filetypes = { "css", "pcss" }
 		config.settings = {
 			stylelintplus = {
 				autoFixOnSave = true,
@@ -121,7 +126,7 @@ for _, server in ipairs(servers) do
 	end
 	if server == "volar" then
 		config.root_dir = util.root_pattern("package.json", "vue.config.js")
-		config.filetypes = { "vue" }
+		config.filetypes = { "vue", "typescript" }
 		config.init_options = {
 			typescript = {
 				tsdk = "/home/Jose/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib",

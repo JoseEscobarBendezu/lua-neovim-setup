@@ -52,6 +52,8 @@ keymaps.basic = {
 		["f"] = "<Plug>(easymotion-overwin-f2)",
 		["Q"] = ":%bd|e#|bd#<cr>|'\"",
 		["<C-w>"] = "<C-i>",
+		["cc"] = "<Plug>(comment_toggle_linewise_current)",
+		["bb"] = "<Plug>(comment_toggle_blockwise_current)",
 	},
 	["i"] = {
 		["<C-q>"] = "<Esc>",
@@ -59,6 +61,10 @@ keymaps.basic = {
 		["<A-h>"] = "<Left>",
 		["<A-k>"] = "<Up>",
 		["<A-j>"] = "<Down>",
+	},
+	["v"] = {
+		["cc"] = "<Plug>(comment_toggle_linewise_visual)",
+		["bb"] = "<Plug>(comment_toggle_blockwise_visual)",
 	},
 }
 

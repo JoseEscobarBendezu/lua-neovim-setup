@@ -1,3 +1,9 @@
 require("impatient")
-require("filetype")
+require("filetype").setup({
+	overrides = {
+		extensions = {
+			pcss = "css",
+		},
+	},
+})
 require("keymaps.basic")

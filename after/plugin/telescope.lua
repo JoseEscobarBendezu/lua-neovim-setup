@@ -94,6 +94,7 @@ telescope.setup({
 			-- the default case_mode is "smart_case"
 		},
 		file_browser = {
+			hidden = true,
 			hijack_netrw = true,
 			mappings = {
 				["i"] = {

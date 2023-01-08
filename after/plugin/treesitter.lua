@@ -38,7 +38,47 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
-require("Comment").setup()
+--require("vim.treesitter.query").set_query(
+--	"ecma",
+--	"injections",
+--	"((comment) @_html_comment (#eq? @_html_comment '/* html */') (template_string) @html)"
+--)
+--require("vim.treesitter.query").set_query(
+--	"ecma",
+--	"injections",
+--	"(((template_string) @_template_string (#match? @_template_string '^`#html')) @html)"
+--)
+--require("vim.treesitter.query").set_query(
+--	"ecma",
+--	"injections",
+--	"((comment) @_css_comment (#eq? @_css_comment '/* css */') (template_string) @css)"
+--)
+--require("vim.treesitter.query").set_query(
+--	"ecma",
+--	"injections",
+--	"(((template_string) @_template_string (#match? @_template_string '^`#css')) @css)"
+--)
+
+require("Comment").setup({
+	-- toggler = {
+	-- 	---Line-comment toggle keymap
+	-- 	line = "cc",
+	-- 	---Block-comment toggle keymap
+	-- 	block = "bb",
+	-- },
+	-- opleader = {
+	-- 	---Line-comment keymap
+	-- 	line = "cc",
+	-- 	---Block-comment keymap
+	-- 	block = "bb",
+	-- },
+	mappings = {
+		-- Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+		basic = false,
+		---Extra mapping; `gco`, `gcO`, `gcA`
+		extra = false,
+	},
+})
 require("nvim-ts-autotag").setup()
 
 --; .local/share/nvim/after/queries/ecma/injections.scm
