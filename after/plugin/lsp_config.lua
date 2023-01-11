@@ -38,12 +38,13 @@ local ts_config = function(client)
 	ts_utils.setup({
 		enable_import_on_completion = true,
 		filter_out_diagnostics_by_code = {
-			6133, --is declared but its value is never read
 			1109, --Expression expected.
 			1155, -- 'const' declarations must be initialized.
-			1155, -- 'const' declarations must be initialized.
-			80001, -- File is a CommonJS module; it may be converted to an ES module
+			2305, -- "Module '{0}' has no exported member '{1}'.":
 			2307, -- Cannot find module '{0}' or its corresponding type declarations. for vue
+			6133, --is declared but its value is never read
+			7005, --  "Variable '{0}' implicitly has an '{1}' type."
+			80001, -- File is a CommonJS module; it may be converted to an ES module
 		},
 	})
 	ts_utils.setup_client(client)
@@ -76,6 +77,9 @@ local on_attach = function(client, bufnr)
 	end
 	if client.name == "html" then
 		enable_capabilities(client, false, true, false)
+	end
+	if client.name == "ts" then
+		enable_capabilities(client, false, false, false)
 	end
 	-- if client.name == "stylelint_lsp" then
 	-- 	enable_capabilities(client, true, true, true)
@@ -128,9 +132,9 @@ for _, server in ipairs(servers) do
 		config.root_dir = util.root_pattern("package.json", "vue.config.js")
 		config.filetypes = { "vue", "typescript" }
 		config.init_options = {
-			typescript = {
+			--[[ typescript = {
 				tsdk = "/home/Jose/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib",
-			},
+			}, ]]
 			languageFeatures = {
 				references = true,
 				definition = true,
@@ -146,7 +150,7 @@ for _, server in ipairs(servers) do
 				},
 				documentLink = true,
 				codeLens = true,
-				diagnostics = true,
+				diagnostics = false,
 			},
 			documentFeatures = {
 				selectionRange = true,
@@ -222,3 +226,16 @@ require("mason").setup()
 require("mason-null-ls").setup({
 	automatic_installation = true,
 })
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, ...)
+	local client = vim.lsp.get_client_by_id(ctx.client_id)
+
+	if client and (client.name == "volar" or client.name == "ts") then
+		result.diagnostics = vim.tbl_filter(function(diagnostic)
+			-- use whatever condition you want to filter diagnostics
+			return not diagnostic.message:find("is declared but its value is never read")
+		end, result.diagnostics)
+	end
+
+	return vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, ...)
+end
