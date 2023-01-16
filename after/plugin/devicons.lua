@@ -1,6 +1,18 @@
 local devicons = require("nvim-web-devicons")
 
 devicons.set_icon({
+	cjs = {
+		icon = "",
+		color = "#FFFF87",
+		cterm_color = "228",
+		name = "commonjavascript",
+	},
+	mjs = {
+		icon = "",
+		color = "#FFFF87",
+		cterm_color = "228",
+		name = "modulejavascript",
+	},
 	js = {
 		icon = "",
 		color = "#FFFF87",

@@ -38,9 +38,14 @@ keymaps.delete_default = {
 		"]]",
 		"<F1>",
 		"e",
+		":",
 	},
 	["t"] = {
 		"<C-t>",
+	},
+	["i"] = {
+		"<C-n>",
+		"<C-p>",
 	},
 }
 
@@ -54,6 +59,7 @@ keymaps.basic = {
 		["<C-w>"] = "<C-i>",
 		["cc"] = "<Plug>(comment_toggle_linewise_current)",
 		["bb"] = "<Plug>(comment_toggle_blockwise_current)",
+		["<CR>"] = ":",
 	},
 	["i"] = {
 		["<C-q>"] = "<Esc>",

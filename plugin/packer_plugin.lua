@@ -14,6 +14,7 @@ require("packer").startup(function(use)
 	use("nvim-lua/plenary.nvim")
 	use("easymotion/vim-easymotion") -- Vim motions on speed!
 	use("tpope/vim-fugitive") -- git commands
+	use("mg979/vim-visual-multi")
 
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
@@ -29,7 +30,13 @@ require("packer").startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
-	use({ "windwp/nvim-ts-autotag" })
+	use({
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("plugins.config.treesitter")
+		end,
+	})
+
 	use("JoosepAlviste/nvim-ts-context-commentstring") -- Context comment in html css and js for template-string treesitter
 	use("windwp/nvim-autopairs") -- Autopairs ({['`
 	use("p00f/nvim-ts-rainbow")
@@ -80,6 +87,15 @@ require("packer").startup(function(use)
 	})
 
 	use("akinsho/toggleterm.nvim")
+
+	-- Lua
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup({})
+		end,
+	})
 
 	if is_bootstrap then
 		require("packer").sync()

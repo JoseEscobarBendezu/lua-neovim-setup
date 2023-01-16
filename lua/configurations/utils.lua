@@ -9,7 +9,7 @@ end
 utils.set_keymap_config = function(keymaps)
 	for mode, keys in pairs(keymaps) do
 		for key, command in pairs(keys) do
-			if key == "<leader>up" then
+			if key == "<leader>up" or key == "<CR>" or key == "<leader>fe" then
 				vim.api.nvim_set_keymap(mode, key, command, { noremap = true, silent = false })
 			else
 				vim.api.nvim_set_keymap(mode, key, command, { noremap = true, silent = true })

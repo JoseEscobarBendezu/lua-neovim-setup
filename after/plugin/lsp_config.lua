@@ -233,7 +233,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, .
 	if client and (client.name == "volar" or client.name == "ts") then
 		result.diagnostics = vim.tbl_filter(function(diagnostic)
 			-- use whatever condition you want to filter diagnostics
-			return not diagnostic.message:find("is declared but its value is never read")
+			return not (
+				diagnostic.message:find("is declared but its value is never read")
+				or diagnostic.message:find("does not exist on type")
+			)
 		end, result.diagnostics)
 	end
 

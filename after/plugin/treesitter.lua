@@ -4,6 +4,7 @@ if not treesitter_status_ok then
 end
 
 require("nvim-treesitter.configs").setup({
+	auto_install = true,
 	ensure_installed = {
 		"bash",
 		"markdown",
@@ -13,7 +14,6 @@ require("nvim-treesitter.configs").setup({
 		"vue",
 		"json",
 		"tsx",
-		"jsdoc",
 		"scss",
 		"lua",
 		"yaml",
@@ -22,12 +22,12 @@ require("nvim-treesitter.configs").setup({
 		"javascript",
 	},
 	ignore_install = { "" },
-	highlight = { enable = true },
+	highlight = { enable = true, use_languagetree = true },
 	indent = { enable = true },
 	context_commentstring = { enable = true },
 	autotag = {
 		enable = true,
-		-- disable = { 'html', 'javascript' }
+		filetypes = { "html", "javascript", "typescript", "javascriptreact", "typescriptreact", "vue" },
 	},
 	autopairs = { enable = false },
 	rainbow = {
@@ -79,7 +79,6 @@ require("Comment").setup({
 		extra = false,
 	},
 })
-require("nvim-ts-autotag").setup()
 
 --; .local/share/nvim/after/queries/ecma/injections.scm
 --(template_string) @html

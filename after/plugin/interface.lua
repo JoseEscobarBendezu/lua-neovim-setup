@@ -247,6 +247,10 @@ vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
 vim.api.nvim_set_hl(0, "CmpItemKindProperty", { bg = "NONE", fg = "#D4D4D4" })
 vim.api.nvim_set_hl(0, "CmpItemKindUnit", { bg = "NONE", fg = "#D4D4D4" })
 
+vim.api.nvim_set_hl(0, "GitSignsAddNr", { bg = "#548566" })
+vim.api.nvim_set_hl(0, "GitSignsChangeNr", { bg = "#d18542" })
+vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { bg = "#833c42" })
+
 -- sign define DiagnosticSignError text=🦊 texthl=DiagnosticSignError linehl= numhl=
 -- sign define DiagnosticSignWarn text=😤 texthl=DiagnosticSignWarn linehl= numhl=
 -- sign define DiagnosticSignInfo text=🧐 texthl=DiagnosticSignInfo linehl= numhl=
