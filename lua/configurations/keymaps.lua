@@ -159,6 +159,7 @@ keymaps.telescope = {
 		["<C-s>"] = ":Telescope git_stash<CR>",
 		["<C-i>"] = "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>",
 		["<C-e>"] = "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
+		["<C-k>"] = "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>",
 	},
 }
 

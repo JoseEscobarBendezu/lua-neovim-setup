@@ -12,6 +12,7 @@ require("gitsigns").setup({
 		delete = { hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
 		topdelete = { hl = "GitSignsDelete", text = "‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
 		changedelete = { hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+		untracked = { hl = "GitSignsAdd", text = "┆", numhl = "GitSignsUntrakedNr", linehl = "GitSignsUntrakedLn" },
 	},
 	signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
 	numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
@@ -37,7 +38,7 @@ require("gitsigns").setup({
 	status_formatter = nil, -- Use default
 	max_file_length = 40000,
 	preview_config = {
-		border = "rounded",
+		border = "none",
 		style = "minimal",
 		relative = "cursor",
 		row = 0,

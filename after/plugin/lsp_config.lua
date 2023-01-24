@@ -132,9 +132,9 @@ for _, server in ipairs(servers) do
 		config.root_dir = util.root_pattern("package.json", "vue.config.js")
 		config.filetypes = { "vue", "typescript" }
 		config.init_options = {
-			--[[ typescript = {
+			typescript = {
 				tsdk = "/home/Jose/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib",
-			}, ]]
+			},
 			languageFeatures = {
 				references = true,
 				definition = true,
@@ -236,6 +236,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, .
 			return not (
 				diagnostic.message:find("is declared but its value is never read")
 				or diagnostic.message:find("does not exist on type")
+				or diagnostic.message:find("is not a module")
+				or diagnostic.message:find("or its corresponding type declarations")
+				or diagnostic.message:find("Cannot find name")
+				or diagnostic.message:find("only refers to a type, but is being used as a value here")
 			)
 		end, result.diagnostics)
 	end
