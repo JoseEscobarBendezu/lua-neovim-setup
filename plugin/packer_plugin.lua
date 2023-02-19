@@ -32,9 +32,10 @@ require("packer").startup(function(use)
 	})
 	use({
 		"windwp/nvim-ts-autotag",
-		config = function()
-			require("plugins.config.treesitter")
-		end,
+		requires = { { "nvim-treesitter/nvim-treesitter" } },
+		-- config = function()
+		-- 	require("plugins.config.treesitter")
+		-- end,
 	})
 
 	use("JoosepAlviste/nvim-ts-context-commentstring") -- Context comment in html css and js for template-string treesitter
@@ -43,7 +44,7 @@ require("packer").startup(function(use)
 
 	use({
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0",
+		tag = "0.1.x",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 	use({

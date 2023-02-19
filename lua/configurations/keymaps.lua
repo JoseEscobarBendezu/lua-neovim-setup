@@ -59,7 +59,7 @@ keymaps.basic = {
 		["<C-w>"] = "<C-i>",
 		["cc"] = "<Plug>(comment_toggle_linewise_current)",
 		["bb"] = "<Plug>(comment_toggle_blockwise_current)",
-		["<CR>"] = ":",
+		-- ["<CR>"] = ":",
 	},
 	["i"] = {
 		["<C-q>"] = "<Esc>",

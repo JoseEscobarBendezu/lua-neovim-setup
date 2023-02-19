@@ -1,5 +1,7 @@
 # lua-neovim-setup
 
+Prequisites: for wayland use `sudo apt install wl-clipboard`
+
 My setup for neovim with lua
 
 #### Telescope

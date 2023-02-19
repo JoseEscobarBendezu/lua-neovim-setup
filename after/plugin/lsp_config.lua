@@ -6,7 +6,7 @@ local servers = {
 	"intelephense",
 	"html",
 	"emmet_ls",
-	"sumneko_lua",
+	"lua_ls",
 	"tsserver",
 	"volar",
 	"cssls",
@@ -130,7 +130,7 @@ for _, server in ipairs(servers) do
 	end
 	if server == "volar" then
 		config.root_dir = util.root_pattern("package.json", "vue.config.js")
-		config.filetypes = { "vue", "typescript" }
+		config.filetypes = { "vue", "typescript", "javascript" }
 		config.init_options = {
 			typescript = {
 				tsdk = "/home/Jose/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib",
@@ -150,7 +150,7 @@ for _, server in ipairs(servers) do
 				},
 				documentLink = true,
 				codeLens = true,
-				diagnostics = false,
+				diagnostics = true,
 			},
 			documentFeatures = {
 				selectionRange = true,
@@ -229,18 +229,22 @@ require("mason-null-ls").setup({
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, ...)
 	local client = vim.lsp.get_client_by_id(ctx.client_id)
+	-- if client and client.name == "tsserver" then
+	-- 	return false
+	-- end
 
 	if client and (client.name == "volar" or client.name == "ts") then
 		result.diagnostics = vim.tbl_filter(function(diagnostic)
-			-- use whatever condition you want to filter diagnostics
+			-- use whatever condition you want to filter diagnostics or document type
+			-- print(diagnostic.source)
+			-- diagnostic.document:find("ts", 1, true)
 			return not (
 				diagnostic.message:find("is declared but its value is never read")
-				or diagnostic.message:find("does not exist on type")
-				or diagnostic.message:find("is not a module")
-				or diagnostic.message:find("or its corresponding type declarations")
 				or diagnostic.message:find("Cannot find name")
-				or diagnostic.message:find("only refers to a type, but is being used as a value here")
 			)
+			-- or diagnostic.message:find("does not exist on type")			-- or diagnostic.message:find("is not a module")
+			--[[ or diagnostic.message:find("or its corresponding type declarations")
+        or diagnostic.message:find("only refers to a type, but is being used as a value here") ]]
 		end, result.diagnostics)
 	end
 
