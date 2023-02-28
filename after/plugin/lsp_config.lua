@@ -2,7 +2,7 @@ local lspconfig = require("lspconfig")
 local util = require("lspconfig/util")
 
 local servers = {
-	"jsonls",
+	-- "jsonls",
 	"intelephense",
 	"html",
 	"emmet_ls",
@@ -13,8 +13,20 @@ local servers = {
 	"tailwindcss",
 }
 
-require("mason-lspconfig").setup({
-	ensure_installed = servers,
+local mason_servers = {
+	"css-lsp",
+	"emmet-ls",
+	"html-lsp",
+	"intelephense",
+	"json-lsp",
+	"lua-language-server",
+	"tailwindcss-language-server",
+	"typescript-language-server",
+	"vue-language-server",
+}
+
+require("mason-tool-installer").setup({
+	ensure_installed = mason_servers,
 })
 
 local keymaps = require("keymaps/lsp_keymaps")

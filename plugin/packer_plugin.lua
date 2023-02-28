@@ -62,8 +62,9 @@ require("packer").startup(function(use)
 
 	use("williamboman/mason.nvim")
 
+	use("WhoIsSethDaniel/mason-tool-installer.nvim")
 	use("jayp0521/mason-null-ls.nvim")
-	use("williamboman/mason-lspconfig.nvim")
+	-- use("williamboman/mason-lspconfig.nvim")
 
 	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-nvim-lsp")
