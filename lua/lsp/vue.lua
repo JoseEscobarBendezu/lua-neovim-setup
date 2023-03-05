@@ -64,7 +64,6 @@ lspconfig_configs.volar_doc = {
 		cmd = volar_cmd,
 		root_dir = volar_root_dir,
 		on_new_config = on_new_config,
-
 		filetypes = { "vue" },
 		-- If you want to use Volar's Take Over Mode (if you know, you know):
 		--filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
@@ -92,7 +91,6 @@ lspconfig_configs.volar_html = {
 		cmd = volar_cmd,
 		root_dir = volar_root_dir,
 		on_new_config = on_new_config,
-
 		filetypes = { "vue" },
 		-- If you want to use Volar's Take Over Mode (if you know, you know), intentionally no 'json':
 		--filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
@@ -115,3 +113,15 @@ lspconfig_configs.volar_html = {
 	},
 }
 lspconfig.volar_html.setup({})
+
+return {
+	setup = function(keymaps, capabilities, enabled_capabilities)
+		require("lspconfig").volar.setup({
+			on_attach = function(client, bufnr)
+				enabled_capabilities(client, false, true, false)
+				keymaps.set(bufnr)
+			end,
+			capabilities = capabilities,
+		})
+	end,
+}
