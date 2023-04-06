@@ -23,7 +23,7 @@ local volar_cmd = { "vue-language-server", "--stdio" }
 local volar_root_dir = lspconfig_util.root_pattern("package.json")
 -- local volar_root_dir = "/home/jose/.local/share/nvim/lsp_servers/volar"
 
-lspconfig_configs.volar_api = {
+--[[ lspconfig_configs.volar_api = {
 	default_config = {
 		cmd = volar_cmd,
 		root_dir = volar_root_dir,
@@ -56,10 +56,10 @@ lspconfig_configs.volar_api = {
 			},
 		},
 	},
-}
-lspconfig.volar_api.setup({})
+} ]]
+-- lspconfig.volar_api.setup({})
 
-lspconfig_configs.volar_doc = {
+--[[ lspconfig_configs.volar_doc = {
 	default_config = {
 		cmd = volar_cmd,
 		root_dir = volar_root_dir,
@@ -83,10 +83,10 @@ lspconfig_configs.volar_doc = {
 			},
 		},
 	},
-}
-lspconfig.volar_doc.setup({})
+} ]]
+-- lspconfig.volar_doc.setup({})
 
-lspconfig_configs.volar_html = {
+--[[ lspconfig_configs.volar_html = {
 	default_config = {
 		cmd = volar_cmd,
 		root_dir = volar_root_dir,
@@ -111,8 +111,8 @@ lspconfig_configs.volar_html = {
 			},
 		},
 	},
-}
-lspconfig.volar_html.setup({})
+} ]]
+-- lspconfig.volar_html.setup({})
 
 return {
 	setup = function(keymaps, capabilities, enabled_capabilities)
@@ -122,6 +122,7 @@ return {
 				keymaps.set(bufnr)
 			end,
 			capabilities = capabilities,
+			filetypes = { "vue", "javascript", "typescript" },
 		})
 	end,
 }

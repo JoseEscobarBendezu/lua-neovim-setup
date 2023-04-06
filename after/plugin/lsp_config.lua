@@ -101,13 +101,10 @@ require("mason-null-ls").setup({
 	automatic_installation = true,
 })
 
---[[vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, ...)
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, ...)
 	local client = vim.lsp.get_client_by_id(ctx.client_id)
-	-- if client and client.name == "tsserver" then
-	-- 	return false
-	-- end
 
-	if client and (client.name == "volar" or client.name == "ts") then
+	if client and client.name == "volar" then
 		result.diagnostics = vim.tbl_filter(function(diagnostic)
 			-- use whatever condition you want to filter diagnostics or document type
 			-- print(diagnostic.source)
@@ -115,12 +112,13 @@ require("mason-null-ls").setup({
 			return not (
 				diagnostic.message:find("is declared but its value is never read")
 				or diagnostic.message:find("Cannot find name")
+				or diagnostic.message:find("Attribute name cannot contain")
 			)
 			-- or diagnostic.message:find("does not exist on type")			-- or diagnostic.message:find("is not a module")
 			--or diagnostic.message:find("or its corresponding type declarations")
-      -- or diagnostic.message:find("only refers to a type, but is being used as a value here")
+			-- or diagnostic.message:find("only refers to a type, but is being used as a value here")
 		end, result.diagnostics)
 	end
 
 	return vim.lsp.diagnostic.on_publish_diagnostics(nil, result, ctx, ...)
-end ]]
+end

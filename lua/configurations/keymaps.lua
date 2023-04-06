@@ -15,6 +15,7 @@ keymaps.delete_default = {
 		"``",
 		"K",
 		"zz",
+		"gd",
 		"go",
 		"gt",
 		"gT",
@@ -160,6 +161,7 @@ keymaps.telescope = {
 		["<C-i>"] = "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>",
 		["<C-e>"] = "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
 		["<C-k>"] = "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>",
+		["<C-g>"] = "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>",
 	},
 }
 
