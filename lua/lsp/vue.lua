@@ -1,4 +1,4 @@
-local lspconfig = require("lspconfig")
+--[[ local lspconfig = require("lspconfig")
 local lspconfig_configs = require("lspconfig.configs")
 local lspconfig_util = require("lspconfig.util")
 
@@ -7,7 +7,7 @@ local function on_new_config(new_config, new_root_dir)
 		local project_root = lspconfig_util.find_node_modules_ancestor(root_dir)
 		return project_root
 				and (lspconfig_util.path.join(project_root, "node_modules", "typescript", "lib", "tsserverlibrary.js"))
-			or ""
+   or ""
 	end
 
 	if
@@ -21,8 +21,7 @@ end
 
 local volar_cmd = { "vue-language-server", "--stdio" }
 local volar_root_dir = lspconfig_util.root_pattern("package.json")
--- local volar_root_dir = "/home/jose/.local/share/nvim/lsp_servers/volar"
-
+local volar_root_dir = "/home/jose/.local/share/nvim/lsp_servers/volar" ]]
 --[[ lspconfig_configs.volar_api = {
 	default_config = {
 		cmd = volar_cmd,

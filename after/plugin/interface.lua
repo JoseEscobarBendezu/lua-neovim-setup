@@ -45,15 +45,15 @@ require("lualine").setup({
 					alpha = "Alpha",
 					NvimTree = "NvimTree",
 				}, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
-				buffers_color = {
+				--[[ buffers_color = {
 					-- Same values as the general color option can be used here.
 					active = "lualine_b_normal", -- Color for active buffer.
 					inactive = "lualine_b_inactive", -- Color for inactive buffer.
-				},
+				}, ]]
 				icons_enabled = true,
 				separator = nil,
 				symbols = {
-					modified = " ﴖ", -- Text to show when the buffer is modified
+					modified = " 💬", -- Text to show when the buffer is modified
 					alternate_file = "", -- Text to show to identify the alternate file
 					directory = "", -- Text to show when the buffer is a directory
 				},
@@ -183,7 +183,8 @@ vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = "#363646" })
 vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#fa9f66", bold = true })
 
 -- kanagawa theme bufferline
-vim.api.nvim_set_hl(0, "lualine_a_buffers_active", { bg = "#1e1f28", bold = true })
+vim.api.nvim_set_hl(0, "lualine_a_buffers_active", { bg = "#658594", fg = "#2A2A37", bold = true })
+vim.api.nvim_set_hl(0, "lualine_a_buffers_inactive", { bg = "#2A2A37", fg = "#D4D4D4" })
 
 -- onenord theme telescope
 -- vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#292e39", bg = "#292e39" })
@@ -233,19 +234,21 @@ vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#fa9f66", bold = true })
 vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { gui = strikethrough, fg = "#808080" })
 vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = "#fa9f66" })
 
+vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "#2D4F67", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindInterface", { bg = "#2D4F67", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindText", { bg = "#2D4F67", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "#957FB8", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindMethod", { bg = "#957FB8", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "#658594", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindProperty", { bg = "#658594", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindField", { bg = "#658594", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindUnit", { bg = "#658594", fg = "#D4D4D4" })
+vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { bg = "#E46876", fg = "#D4D4D4" })
+
 -- onenord cmp theme
 -- vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#569CD6" })
 -- vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = "NONE", gui = strikethrough, fg = "#808080" })
 -- vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { bg = "NONE", fg = "#569CD6" })
-
-vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindInterface", { bg = "NONE", fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindText", { bg = "NONE", fg = "#9CDCFE" })
-vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE", fg = "#C586C0" })
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", { bg = "NONE", fg = "#C586C0" })
-vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
-vim.api.nvim_set_hl(0, "CmpItemKindProperty", { bg = "NONE", fg = "#D4D4D4" })
-vim.api.nvim_set_hl(0, "CmpItemKindUnit", { bg = "NONE", fg = "#D4D4D4" })
 
 vim.api.nvim_set_hl(0, "GitSignsAddNr", { bg = "#33503d" })
 vim.api.nvim_set_hl(0, "GitSignsChangeNr", { bg = "#704724" })

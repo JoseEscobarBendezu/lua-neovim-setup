@@ -1,25 +1,25 @@
 local icons = {
-	Text = "",
+	Text = "",
 	Method = "",
 	Function = "",
 	Constructor = "⌘",
 	Field = "ﰠ",
-	Variable = "",
+	Variable = "",
 	Class = "ﴯ",
 	Interface = "",
 	Module = "",
 	Property = "ﰠ",
-	Unit = "塞",
+	Unit = "",
 	Value = "",
 	Enum = "",
-	Keyword = "廓",
-	Snippet = "",
+	Keyword = "",
+	Snippet = "",
 	Color = "",
 	File = "",
 	Reference = "",
 	Folder = "",
 	EnumMember = "",
-	Constant = "",
+	Constant = "",
 	Struct = "פּ",
 	Event = "",
 	Operator = "",
@@ -43,7 +43,7 @@ cmp.setup({
 		fields = { "kind", "abbr" },
 		format = function(_, vim_item)
 			vim_item.menu = vim_item.kind
-			vim_item.kind = icons[vim_item.kind] or ""
+			vim_item.kind = " " .. (icons[vim_item.kind] or "") .. " "
 
 			return vim_item
 		end,
@@ -66,6 +66,14 @@ cmp.setup({
 		{ name = "path" },
 	}),
 	preselect = cmp.PreselectMode.None,
+	-- new config
+	window = {
+		completion = {
+			winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+			col_offset = -3,
+			side_padding = 0,
+		},
+	},
 })
 
 --autopairs

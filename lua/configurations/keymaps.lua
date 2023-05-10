@@ -59,8 +59,10 @@ keymaps.basic = {
 		["Q"] = ":%bd|e#|bd#<cr>|'\"",
 		["<C-w>"] = "<C-i>",
 		["cc"] = "<Plug>(comment_toggle_linewise_current)",
-		["bb"] = "<Plug>(comment_toggle_blockwise_current)",
-		-- ["<CR>"] = ":",
+		["nn"] = "<Plug>(comment_toggle_blockwise_current)",
+		["<C-q>"] = "<Esc>",
+		["<F1>"] = ":LspRestart<CR>",
+		["`"] = ":",
 	},
 	["i"] = {
 		["<C-q>"] = "<Esc>",

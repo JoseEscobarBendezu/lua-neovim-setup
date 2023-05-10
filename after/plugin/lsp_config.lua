@@ -1,6 +1,3 @@
-local lspconfig = require("lspconfig")
-local util = require("lspconfig/util")
-
 local lsp_servers = {
 	"lua",
 	"javascript-typescript",
@@ -37,11 +34,6 @@ local enable_capabilities = function(client, formatting, diagnostic, rangformatt
 	client.server_capabilities.document_diagnostics = diagnostic
 	client.server_capabilities.documentRangeFormattingProvider = rangformatting
 end
-
-local lsp_flags = {
-	-- This is the default in Nvim 0.7+
-	debounce_text_changes = 150,
-}
 
 local on_attach = function(client, bufnr)
 	keymaps.set(bufnr)
