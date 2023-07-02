@@ -16,8 +16,6 @@ require("packer").startup(function(use)
 	use("tpope/vim-fugitive") -- git commands
 	use("mg979/vim-visual-multi")
 
-	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-
 	use("tpope/vim-surround") -- Autopairs
 	use("numToStr/Comment.nvim")
 
@@ -40,7 +38,7 @@ require("packer").startup(function(use)
 
 	use("JoosepAlviste/nvim-ts-context-commentstring") -- Context comment in html css and js for template-string treesitter
 	use("windwp/nvim-autopairs") -- Autopairs ({['`
-	use("p00f/nvim-ts-rainbow")
+	use("HiPhish/nvim-ts-rainbow2")
 
 	use({
 		"nvim-telescope/telescope.nvim",
@@ -89,6 +87,7 @@ require("packer").startup(function(use)
 	})
 
 	use("akinsho/toggleterm.nvim")
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
 	-- Lua
 	use({
