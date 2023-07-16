@@ -114,14 +114,15 @@ local volar_root_dir = "/home/jose/.local/share/nvim/lsp_servers/volar" ]]
 -- lspconfig.volar_html.setup({})
 
 return {
-	setup = function(keymaps, capabilities, enabled_capabilities)
-		require("lspconfig").volar.setup({
-			on_attach = function(client, bufnr)
-				enabled_capabilities(client, false, true, false)
-				keymaps.set(bufnr)
-			end,
-			capabilities = capabilities,
-			filetypes = { "vue", "javascript", "typescript" },
-		})
-	end,
+  setup = function(keymaps, capabilities, enabled_capabilities)
+    -- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+    require("lspconfig").volar.setup({
+      on_attach = function(client, bufnr)
+        enabled_capabilities(client, false, true, false, true)
+        keymaps.set(bufnr)
+      end,
+      capabilities = capabilities,
+      filetypes = { "vue", "javascript", "typescript" },
+    })
+  end,
 }
