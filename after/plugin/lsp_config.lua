@@ -1,6 +1,6 @@
 local lsp_servers = {
 	"lua",
-	"javascript-typescript",
+	-- "javascript-typescript",
 	"css",
 	"html",
 	"emmet",
