@@ -114,15 +114,27 @@ local volar_root_dir = "/home/jose/.local/share/nvim/lsp_servers/volar" ]]
 -- lspconfig.volar_html.setup({})
 
 return {
-  setup = function(keymaps, capabilities, enabled_capabilities)
-    -- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
-    require("lspconfig").volar.setup({
-      on_attach = function(client, bufnr)
-        enabled_capabilities(client, false, true, false, true)
-        keymaps.set(bufnr)
-      end,
-      capabilities = capabilities,
-      filetypes = { "vue", "javascript", "typescript" },
-    })
-  end,
+	setup = function(keymaps, capabilities, enabled_capabilities)
+		-- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+		require("lspconfig").volar.setup({
+			on_attach = function(client, bufnr)
+				enabled_capabilities(client, false, true, false)
+				keymaps.set(bufnr)
+			end,
+			capabilities = capabilities,
+			filetypes = { "vue", "javascript", "typescript" },
+			flags = {
+				debounce_text_changes = 75,
+			},
+			on_new_config = function(new_config, new_root_dir)
+				new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+			end,
+			init_options = {
+				typescript = {
+					tsdk = vim.fn.stdpath("data")
+						.. "/mason/packages/typescript-language-server/node_modules/typescript/lib",
+				},
+			},
+		})
+	end,
 }
