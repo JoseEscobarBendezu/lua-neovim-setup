@@ -41,6 +41,13 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
+local status, autotag = pcall(require, "nvim-ts-autotag")
+if not status then
+	return
+end
+
+autotag.setup({})
+
 --require("vim.treesitter.query").set_query(
 --	"ecma",
 --	"injections",
