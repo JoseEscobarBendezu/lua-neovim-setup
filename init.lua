@@ -1,11 +1,4 @@
 require("impatient")
-require("filetype").setup({
-	overrides = {
-		extensions = {
-			pcss = "css",
-		},
-	},
-})
 require("keymaps.basic")
 
 vim.cmd([[
@@ -18,4 +11,6 @@ fun! VM_Exit()
   nunmap <buffer> <C-q>
   "iunmap <buffer> <C-q>
 endfun
+
+autocmd BufNewFile,BufRead *.pcss setfiletype css
 ]])

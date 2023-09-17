@@ -10,7 +10,6 @@ end
 require("packer").startup(function(use)
 	use("wbthomason/packer.nvim") -- Package manager
 	use("lewis6991/impatient.nvim")
-	use("nathom/filetype.nvim")
 	use("nvim-lua/plenary.nvim")
 	use("easymotion/vim-easymotion") -- Vim motions on speed!
 	use("tpope/vim-fugitive") -- git commands
