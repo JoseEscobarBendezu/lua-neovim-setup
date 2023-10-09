@@ -46,3 +46,5 @@ opt.breakindent = true -- Enable break indent
 -- opt.list = true            -- show space and tabs chars
 -- opt.spelllang = "en_us"
 opt.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+
+vim.cmd([[let mapleader = " "]])

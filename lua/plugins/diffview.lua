@@ -1,7 +1,7 @@
 return {
     'sindrets/diffview.nvim',
     keys = {
-      { "<F1>" },
+      { "<F2>" },
     },
     config = function ()
       local actions = require("diffview.actions")

@@ -216,6 +216,7 @@ utils.delete_keymap_config(keymaps.delete_default)
 utils.set_keymap_config(keymaps.basic)
 utils.set_keymap_config(keymaps.telescope)
 utils.set_keymap_config(keymaps.view_panels_control)
+utils.set_keymap_config(keymaps.git_diff)
 
 vim.cmd([[
 
