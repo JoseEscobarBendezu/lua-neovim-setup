@@ -34,6 +34,7 @@ opt.diffopt = "vertical"
 opt.laststatus = 3 --Hidden inactive panels status
 opt.mouse = "a" -- Enable mouse mode
 opt.hidden = true
+opt.errorbells = false
 
 -- opt.termguicolors = true   -- Enable colors in terminal
 opt.breakindent = true -- Enable break indent
