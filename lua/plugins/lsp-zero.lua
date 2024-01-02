@@ -43,12 +43,11 @@ return {
 		{ "hrsh7th/cmp-nvim-lsp" }, -- Required
 		{ "hrsh7th/cmp-buffer" }, -- Optional
 		{ "hrsh7th/cmp-path" }, -- Optional
-		{ "saadparwaiz1/cmp_luasnip" }, -- Optional
 		{ "hrsh7th/cmp-nvim-lua" }, -- Optional
 
 		-- Snippets
 		{ "L3MON4D3/LuaSnip" }, -- Required
-		{ "rafamadriz/friendly-snippets" }, -- Optional
+		-- { "rafamadriz/friendly-snippets" }, -- Optional
 	},
 	config = function()
 		local lsp_zero = require("lsp-zero")
@@ -60,7 +59,7 @@ return {
 			suggest_lsp_servers = false,
 		})
 
-		lsp_zero.on_attach(function(client, bufnr)
+		lsp_zero.on_attach(function(_, bufnr)
 			local opts = { noremap = true, silent = true }
 			local keymap = vim.keymap.set
 			vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -84,7 +83,7 @@ return {
 			"cssls",
 			"tailwindcss",
 			"html",
-			"tsserver",
+			--"tsserver",
 			"lua_ls",
 		})
 
@@ -95,11 +94,19 @@ return {
 				lsp_zero.default_setup,
 				volar = function()
 					require("lspconfig").volar.setup({
-						on_attach = function(client)
-							pcall(function()
-								client.resolved_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
-							end)
-						end,
+						filetypes = {
+							"javascript",
+							"typescript",
+							"json",
+							"vue",
+						},
+						capabilities = {
+							workspace = {
+								didChangeWatchedFiles = {
+									dynamicRegistration = true,
+								},
+							},
+						},
 					})
 				end,
 			},
