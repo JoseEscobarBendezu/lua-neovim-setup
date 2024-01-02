@@ -62,6 +62,7 @@ keymaps.basic = {
 		["<C-q>"] = "<Esc>",
 		["<F1>"] = ":LspRestart<CR>",
 		["`"] = ":",
+		["<leader>s"] = "<Plug>(easymotion-overwin-f2)",
 	},
 	["i"] = {
 		["<C-q>"] = "<Esc>",
@@ -160,7 +161,7 @@ keymaps.telescope = {
 		["<C-b>"] = ":Telescope git_branches<CR>",
 		["<C-s>"] = ":Telescope git_stash<CR>",
 		["<C-i>"] = "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>",
-		["<C-e>"] = "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
+		--["<C-e>"] = "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
 		["<C-k>"] = "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>",
 		["<C-g>"] = "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>",
 	},
