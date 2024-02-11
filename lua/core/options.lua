@@ -36,7 +36,7 @@ opt.mouse = "a" -- Enable mouse mode
 opt.hidden = true
 opt.errorbells = false
 
--- opt.termguicolors = true   -- Enable colors in terminal
+opt.termguicolors = true -- Enable colors in terminal
 opt.breakindent = true -- Enable break indent
 -- opt.ignorecase = true      -- Case insensitive searching unless /C or capital in search
 -- opt.smartcase = true       -- Smart case

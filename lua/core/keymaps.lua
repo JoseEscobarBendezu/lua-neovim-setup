@@ -181,6 +181,7 @@ keymaps.git_diff = {
 		--["<leader>ss"] = ":Git stash save<CR>",
 		--["<leader>sp"] = ":Git stash pop<CR>",
 		["<leader>gs"] = ":LazyGit<CR>",
+		["<leader>ga"] = ":LazyGitFilterCurrentFile<CR>",
 		["<leader>dh"] = ":DiffviewFileHistory<CR>",
 		["<leader>do"] = ":DiffviewOpen<CR>",
 		["<leader>dc"] = ":DiffviewClose<CR>",
