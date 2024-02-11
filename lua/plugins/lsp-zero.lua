@@ -70,7 +70,7 @@ return {
 			keymap("n", "nd", vim.diagnostic.goto_next, opts)
 			keymap("n", "gi", vim.lsp.buf.implementation, bufopts)
 			keymap("n", "gh", vim.lsp.buf.hover, bufopts)
-			keymap("n", "gd", vim.lsp.buf.definition, bufopts)
+			--keymap("n", "gd", vim.lsp.buf.definition, bufopts)
 			keymap("n", "gD", vim.lsp.buf.declaration, bufopts)
 			keymap("n", "gc", vim.lsp.buf.code_action, bufopts)
 			keymap("n", "gr", vim.lsp.buf.rename, bufopts)

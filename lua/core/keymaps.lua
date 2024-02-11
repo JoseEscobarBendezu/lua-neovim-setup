@@ -74,6 +74,7 @@ keymaps.basic = {
 	["v"] = {
 		["cc"] = "<Plug>(comment_toggle_linewise_visual)",
 		["nn"] = "<Plug>(comment_toggle_blockwise_visual)",
+		["<leader>y"] = '"+y',
 	},
 }
 
@@ -156,25 +157,30 @@ keymaps.telescope = {
 	["n"] = {
 		["<C-p>"] = "<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",
 		["<C-f>"] = "<cmd>Telescope file_browser<CR>",
-		["<C-l>"] = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>",
+		["<C-a>"] = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>",
+		--["<C-l>"] = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>",
 		["<C-r>"] = "<cmd>lua require('telescope.builtin').lsp_references()<CR>",
-		["<C-b>"] = ":Telescope git_branches<CR>",
-		["<C-s>"] = ":Telescope git_stash<CR>",
+		--["<C-b>"] = ":Telescope git_branches<CR>",
+		--["<C-s>"] = ":Telescope git_stash<CR>",
 		["<C-i>"] = "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>",
 		--["<C-e>"] = "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
 		["<C-k>"] = "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>",
-		["<C-g>"] = "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>",
+		["gd"] = "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>",
+		["gv"] = "<cmd>lua require('telescope.builtin').lsp_definitions({jump_type='vsplit'})<CR>",
+		["gx"] = "<cmd>lua require('telescope.builtin').lsp_definitions({jump_type='split'})<CR>",
+		--["<C-g>"] = "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>",
 	},
 }
 
 keymaps.git_diff = {
 	["n"] = {
-		["<leader>gs"] = ":G<CR>",
-		["<leader>up"] = ":Git push --set-upstream origin ",
-		["<leader>fe"] = ":Git fetch --all -p<CR>",
-		["<leader>pl"] = ":Git pull<CR>",
-		["<leader>ss"] = ":Git stash save<CR>",
-		["<leader>sp"] = ":Git stash pop<CR>",
+		--["<leader>gs"] = ":G<CR>",
+		--["<leader>up"] = ":Git push --set-upstream origin ",
+		--["<leader>fe"] = ":Git fetch --all -p<CR>",
+		--["<leader>pl"] = ":Git pull<CR>",
+		--["<leader>ss"] = ":Git stash save<CR>",
+		--["<leader>sp"] = ":Git stash pop<CR>",
+		["<leader>gs"] = ":LazyGit<CR>",
 		["<leader>dh"] = ":DiffviewFileHistory<CR>",
 		["<leader>do"] = ":DiffviewOpen<CR>",
 		["<leader>dc"] = ":DiffviewClose<CR>",
