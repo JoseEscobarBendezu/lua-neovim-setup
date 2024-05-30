@@ -1,10 +1,10 @@
 local icons = {
-	Text = "",
-	Method = "",
-	Function = "",
+	Text = "󰦨",
+	Method = "",
+	Function = "󰊕",
 	Constructor = "⌘",
 	Field = "ﰠ",
-	Variable = "",
+	Variable = "󱀍",
 	Class = "ﴯ",
 	Interface = "",
 	Module = "",
@@ -27,16 +27,12 @@ local icons = {
 }
 
 return {
-	"VonHeikemen/lsp-zero.nvim",
-	branch = "v1.x",
+	"neovim/nvim-lspconfig",
 	dependencies = {
 		-- LSP Support
-		{ "neovim/nvim-lspconfig" }, -- Required
-		{ "williamboman/mason.nvim" }, -- Optional
-		{ "williamboman/mason-lspconfig.nvim" }, -- Optional
-
-		-- linter
-		{ "WhoIsSethDaniel/mason-tool-installer.nvim" }, --Optional
+		"williamboman/mason-lspconfig.nvim",
+		"williamboman/mason.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim", -- linter
 
 		-- Autocompletion
 		{ "hrsh7th/nvim-cmp" }, -- Required
@@ -50,16 +46,9 @@ return {
 		-- { "rafamadriz/friendly-snippets" }, -- Optional
 	},
 	config = function()
-		local lsp_zero = require("lsp-zero")
+		local lspconfig = require("lspconfig")
 
-		lsp_zero.preset({
-			name = "minimal",
-			set_lsp_keymaps = true,
-			manage_nvim_cmp = true,
-			suggest_lsp_servers = false,
-		})
-
-		lsp_zero.on_attach(function(_, bufnr)
+		local on_attach = function(client, bufnr)
 			local opts = { noremap = true, silent = true }
 			local keymap = vim.keymap.set
 			vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -77,43 +66,36 @@ return {
 			keymap("n", "gv", "<cmd>vsplit<cr><cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
 			keymap("n", "gx", "<cmd>split<cr><cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
 			keymap("n", "gq", vim.lsp.buf.signature_help, bufopts)
-		end)
+		end
 
-		lsp_zero.ensure_installed({
-			"cssls",
-			"tailwindcss",
-			"html",
-			--"tsserver",
-			"lua_ls",
-		})
-
-		require("mason").setup({})
+		local mason = require("mason")
+		mason.setup()
 		require("mason-lspconfig").setup({
-			ensure_installed = { "volar" },
+			ensure_installed = {
+				-- "tsserver",
+				"volar",
+				"cssls",
+				"tailwindcss",
+				"html",
+				"lua_ls",
+			},
 			handlers = {
-				lsp_zero.default_setup,
+				function(server_name)
+					require("lspconfig")[server_name].setup({
+						on_attach = on_attach,
+					})
+				end,
 				volar = function()
-					require("lspconfig").volar.setup({
-						filetypes = {
-							"javascript",
-							"typescript",
-							"json",
-							"vue",
-						},
-						capabilities = {
-							workspace = {
-								didChangeWatchedFiles = {
-									dynamicRegistration = true,
-								},
-							},
+					lspconfig.volar.setup({
+						filetypes = { "vue", "javascript", "typescript" },
+						init_options = {
+							vue = { hybridMode = false },
+							typescript = { tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib" },
 						},
 					})
 				end,
 			},
-			automatic_installation = true,
 		})
-
-		lsp_zero.setup()
 
 		require("mason-tool-installer").setup({
 			ensure_installed = {
@@ -126,6 +108,16 @@ return {
 		local cmp = require("cmp")
 
 		cmp.setup({
+			snippet = {
+				-- REQUIRED - you must specify a snippet engine
+				expand = function(args)
+					--vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+					-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+					-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+					-- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+				end,
+			},
 			window = {
 				completion = {
 					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
@@ -162,6 +154,7 @@ return {
 				end,
 			},
 		})
+
 		vim.fn.sign_define(
 			"DiagnosticSignError",
 			{ text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "DiagnosticLineNrError" }
