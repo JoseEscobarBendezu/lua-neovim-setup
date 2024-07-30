@@ -34,6 +34,7 @@ keymaps.delete_default = {
 		"<C-y>",
 		"<C-t>",
 		"<leader>q",
+		"<leader>f",
 		"<leader>dd",
 		"[[",
 		"]]",
@@ -54,15 +55,13 @@ keymaps.basic = {
 		["pp"] = "]p",
 		["r"] = "<C-r>",
 		["w"] = ":w<CR>",
-		["f"] = "<Plug>(easymotion-overwin-f2)",
+		["<leader>f"] = "<Plug>(easymotion-overwin-f2)",
 		["Q"] = ":%bd|e#|bd#<cr>|'\"",
-		["<C-w>"] = "<C-i>",
 		["cc"] = "<Plug>(comment_toggle_linewise_current)",
 		["nn"] = "<Plug>(comment_toggle_blockwise_current)",
 		["<C-q>"] = "<Esc>",
 		["<F1>"] = ":LspRestart<CR>",
 		["`"] = ":",
-		["<leader>s"] = "<Plug>(easymotion-overwin-f2)",
 	},
 	["i"] = {
 		["<C-q>"] = "<Esc>",
@@ -169,6 +168,7 @@ keymaps.telescope = {
 		["gv"] = "<cmd>lua require('telescope.builtin').lsp_definitions({jump_type='vsplit'})<CR>",
 		["gx"] = "<cmd>lua require('telescope.builtin').lsp_definitions({jump_type='split'})<CR>",
 		--["<C-g>"] = "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>",
+		["<C-s>"] = "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
 	},
 }
 

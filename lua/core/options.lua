@@ -1,6 +1,9 @@
 local opt = vim.opt
 local prefix = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config")
 
+vim.keymap.set("n", "<Space>", "<Nop>")
+vim.g.mapleader = " " -- set mapleader with <space>
+
 vim.opt.undodir = { prefix .. "/nvim/.undo//" }
 
 opt.encoding = "utf-8" -- Format text
@@ -47,4 +50,5 @@ opt.breakindent = true -- Enable break indent
 -- opt.spelllang = "en_us"
 opt.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 
-vim.cmd([[let mapleader = " "]])
+opt.timeoutlen = 1000 -- Time in milliseconds to wait for a mapped sequence to complete. default is 1000
+opt.ttimeoutlen = 0 --Time in milliseconds to wait for a key code sequence to complete.

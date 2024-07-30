@@ -1,5 +1,7 @@
 # lua-neovim-setup
 
+New setup for neovim in 2024 for typescript vue3 and git management
+
 Prequisites: for wayland use `sudo apt install wl-clipboard`
 
 install lazygit
