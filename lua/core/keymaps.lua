@@ -156,8 +156,7 @@ keymaps.telescope = {
 	["n"] = {
 		["<C-p>"] = "<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",
 		["<C-f>"] = "<cmd>Telescope file_browser<CR>",
-		["<C-a>"] = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>",
-		--["<C-l>"] = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>",
+		["<C-s>"] = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>",
 		["<C-r>"] = "<cmd>lua require('telescope.builtin').lsp_references()<CR>",
 		--["<C-b>"] = ":Telescope git_branches<CR>",
 		--["<C-s>"] = ":Telescope git_stash<CR>",
@@ -167,8 +166,7 @@ keymaps.telescope = {
 		["gd"] = "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>",
 		["gv"] = "<cmd>lua require('telescope.builtin').lsp_definitions({jump_type='vsplit'})<CR>",
 		["gx"] = "<cmd>lua require('telescope.builtin').lsp_definitions({jump_type='split'})<CR>",
-		--["<C-g>"] = "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>",
-		["<C-s>"] = "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+		["<C-a>"] = "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
 	},
 }
 
@@ -244,13 +242,6 @@ endfunction
 
 function s:close_window()
 
-  " is dap session open
-  if win_screenpos("%") == [2,40]
-    echo 'is dap session'
-    exec 'quit'
-    return
-  end
-
   let last_window = winnr('$')
   let i = 0
   let is_repeat = 0
@@ -268,41 +259,21 @@ function s:close_window()
     return
   endif
 
-  "es el ultimo?
-  if win_screenpos("%") != [2,1] && win_screenpos("%") != [2,42]
-    exec ':bdelete'
-    return
-  endif
-
   "hay buffers inactivos?
   let buffers = map(filter(copy(getbufinfo()), 'v:val.listed'), 'v:val.bufnr')
   let size_buffers = len(buffers)
 
-  "if bufname("%") == "NvimTree_1" && size_buffers == 0
-  "  exec ':quitall'
-  "  return
-  "endif
-  "
-  "if bufname("%") == "NvimTree_1" && size_buffers == 1
-  "  exec ':NvimTreeClose'
-  "  return
-  "endif
+  "es el ultimo?
+  if win_screenpos("%") != [2,1] && size_buffers > 1
+    exec ':bdelete'
+    return
+  endif
 
   if size_buffers == 1
     "no hay mas buffers
     exec ':quitall'
     return
   endif
-
-  "hay mas buffers
-  "if win_screenpos("%") == [2,42]
-  "  "nvimtree is open
-  "  exec ':NvimTreeClose'
-  "  exec ':bdelete'
-  "  exec ':NvimTreeOpen'
-  "  exec ':wincmd l'
-  "  return
-  "endif
   
   exec ':bdelete'
   return
@@ -310,6 +281,7 @@ endfunction
 
 noremap <silent> q :call <SID>close_window()<CR>
 noremap <silent> m :call <SID>minimize()<CR>
+
 ]])
 
 vim.cmd([[
@@ -387,3 +359,21 @@ noremap <leader>re :call <SID>AskForConfirmation('reset HEAD for this branch ','
 
 noremap <leader>ps :call <SID>AskForConfirmation('push commit ',':Git push')<CR>
 ]])
+
+vim.keymap.set("n", "Q", function()
+	local bufs = vim.api.nvim_list_bufs()
+	local current_buf = vim.api.nvim_get_current_buf()
+	for _, i in ipairs(bufs) do
+		if i ~= current_buf then
+			if pcall(function()
+				vim.api.nvim_buf_delete(i, {})
+			end) then
+			else
+				if vim.fn.getbufinfo(i)[1].hidden == 1 then
+					vim.cmd("vert sb " .. i)
+				end
+				print("Tienes cambios pendientes en: " .. vim.api.nvim_buf_get_name(i))
+			end
+		end
+	end
+end, { noremap = true })

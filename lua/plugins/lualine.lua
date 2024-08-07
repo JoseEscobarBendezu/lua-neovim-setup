@@ -3,6 +3,25 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		local lualine = require("lualine")
+		local buffers = function()
+			local buf_size = 0
+
+			-- buflisted === :ls
+			for buffer = 1, vim.fn.bufnr("$") do
+				local is_listed = vim.fn.buflisted(buffer) == 1
+				if is_listed then
+					if vim.fn.getbufinfo(buffer)[1].hidden == 1 then
+						buf_size = buf_size + 1
+					end
+				end
+			end
+
+			if buf_size == 0 then
+				return ""
+			end
+
+			return "Buffers ocultos: " .. buf_size
+		end
 		lualine.setup({
 			options = {
 				icons_enabled = true,
@@ -16,8 +35,12 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = { "branch" },
 				lualine_c = { "%=", "%f" },
-				lualine_x = { "diagnostics" },
-				lualine_y = { "diff", "progress" },
+				lualine_x = { --[[ "diagnostics" ]]
+				},
+				lualine_y = { --[[ "diff" , ]]
+					buffers,
+					"progress",
+				},
 				lualine_z = { "location" },
 			},
 			inactive_sections = {
@@ -28,7 +51,7 @@ return {
 				lualine_y = {},
 				lualine_z = {},
 			},
-			tabline = {
+			--[[ tabline = {
 				lualine_a = {
 					{
 						"buffers",
@@ -63,7 +86,7 @@ return {
 				lualine_x = {},
 				lualine_y = {},
 				lualine_z = {},
-			},
+			}, ]]
 		})
 	end,
 }

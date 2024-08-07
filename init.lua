@@ -7,13 +7,5 @@ require("core") -- call global configurations
 --prettier --> conform✅
 --linter --> lint✅
 --statusbar --> lualine ✅
---git --> lazygit + diff + gitsigns ✅
+--git --> neogit + viewdiff + gitsigns ⏳
 --gestor de archivos --> telescope ✅
-
--- echo "export PATH=\"/home/jose-fedora-37/.local/bin:\$PATH\"" >> ~/.bashrc && source ~/.bashrc
--- configuiración para que lazygit abra en un buffer
--- vim.cmd([[
---   if has('nvim') && executable('nvr')
---     let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
---   endif
--- ]])

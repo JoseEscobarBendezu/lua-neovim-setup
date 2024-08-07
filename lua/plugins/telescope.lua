@@ -47,7 +47,7 @@ return {
 					-- - `<C-y>`: merges the currently selected branch, with confirmation prompt
 					--   before deletion
 				},
-				vimgrep_arguments = {
+				--[[ vimgrep_arguments = {
 					"rg",
 					"--color=never",
 					"--no-heading",
@@ -55,11 +55,11 @@ return {
 					"--line-number",
 					"--column",
 					"--smart-case",
-				},
-				preview = {
-					-- treesitter = false,
-				},
-				prompt_prefix = "  ",
+				}, ]]
+				--[[ preview = {
+					treesitter = false,
+				}, ]]
+				prompt_prefix = "🚀 ",
 				selection_caret = "  ",
 				entry_prefix = "  ",
 				initial_mode = "insert",
@@ -81,7 +81,7 @@ return {
 				},
 				--file_sorter = require("telescope.sorters").get_fuzzy_file,
 				file_ignore_patterns = { ".git/", "node_modules" },
-				generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+				-- generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 				path_display = { "truncate" },
 				winblend = 0,
 				border = {},
