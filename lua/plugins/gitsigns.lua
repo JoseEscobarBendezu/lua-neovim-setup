@@ -75,6 +75,7 @@ return {
 				map("n", "<leader>gi", function()
 					gs.blame_line({ full = true })
 				end)
+				map("n", "<leader>gr", gs.reset_hunk)
 			end,
 		})
 

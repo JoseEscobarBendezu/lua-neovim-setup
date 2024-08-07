@@ -145,19 +145,13 @@ keymaps.view_panels_control = {
 	},
 }
 
-keymaps.sidebars = {
-	["n"] = {
-		-- ["e"] = ":TroubleToggle<CR>",
-		-- keymap("n", "<C-d>", ":NvimTreeToggle<CR>", opts)
-	},
-}
-
 keymaps.telescope = {
 	["n"] = {
 		["<C-p>"] = "<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",
 		["<C-f>"] = "<cmd>Telescope file_browser<CR>",
 		["<C-s>"] = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>",
 		["<C-r>"] = "<cmd>lua require('telescope.builtin').lsp_references()<CR>",
+		["<C-b>"] = "<cmd>lua require('telescope.builtin').buffers()<cr>",
 		--["<C-b>"] = ":Telescope git_branches<CR>",
 		--["<C-s>"] = ":Telescope git_stash<CR>",
 		["<C-i>"] = "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>",
@@ -377,3 +371,11 @@ vim.keymap.set("n", "Q", function()
 		end
 	end
 end, { noremap = true })
+
+vim.cmd([[ 
+
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+cnoremap <C-q> <ESC>
+
+]])

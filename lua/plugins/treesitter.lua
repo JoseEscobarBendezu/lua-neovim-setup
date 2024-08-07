@@ -4,7 +4,10 @@ return {
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
 				"lua",
+				"luadoc",
+				"vim",
 				"vimdoc",
+				"query",
 				"javascript",
 				"typescript",
 				"css",

@@ -40,6 +40,7 @@ return {
 		{ "hrsh7th/cmp-buffer" }, -- Optional
 		{ "hrsh7th/cmp-path" }, -- Optional
 		{ "hrsh7th/cmp-nvim-lua" }, -- Optional
+		{ "hrsh7th/cmp-cmdline" }, -- Optional
 
 		-- Snippets
 		{ "L3MON4D3/LuaSnip" }, -- Required
@@ -153,6 +154,20 @@ return {
 					return vim_item
 				end,
 			},
+		})
+
+		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({
+				{ name = "path" },
+			}, {
+				{
+					name = "cmdline",
+					option = {
+						ignore_cmds = { "Man", "!" },
+					},
+				},
+			}),
 		})
 
 		vim.fn.sign_define(
