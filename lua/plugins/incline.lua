@@ -11,6 +11,10 @@ return {
 					vertical = 0,
 				},
 			},
+			debounce_threshold = {
+				falling = 75,
+				rising = 75,
+			},
 			render = function(props)
 				-- local bgcol = props.focused and "#658594" or "#16161d"
 				local bgcol = "#1e1f28"
