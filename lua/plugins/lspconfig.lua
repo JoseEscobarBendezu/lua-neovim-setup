@@ -49,7 +49,7 @@ return {
 	config = function()
 		local lspconfig = require("lspconfig")
 
-		local on_attach = function(client, bufnr)
+		local on_attach = function(_, bufnr)
 			local opts = { noremap = true, silent = true }
 			local keymap = vim.keymap.set
 			vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -79,6 +79,7 @@ return {
 				"tailwindcss",
 				"html",
 				"lua_ls",
+				"eslint",
 			},
 			handlers = {
 				function(server_name)
@@ -86,7 +87,7 @@ return {
 						on_attach = on_attach,
 					})
 				end,
-				lua_ls = function()
+				--[[ lua_ls = function()
 					lspconfig.lua_ls.setup({
 						on_init = function(client)
 							if client.workspace_folders then
@@ -134,7 +135,7 @@ return {
 							},
 						},
 					})
-				end,
+				end, ]]
 				volar = function()
 					lspconfig.volar.setup({
 						filetypes = { "vue", "javascript", "typescript" },
