@@ -167,11 +167,11 @@ keymaps.telescope = {
 keymaps.git_diff = {
 	["n"] = {
 		["<leader>gs"] = ":Neogit<CR>",
-		["<leader>up"] = ":Git push --set-upstream origin ",
-		["<leader>fe"] = ":Git fetch --all -p<CR>",
-		["<leader>pl"] = ":Git pull<CR>",
-		["<leader>ss"] = ":Git stash save<CR>",
-		["<leader>sp"] = ":Git stash pop<CR>",
+		-- ["<leader>up"] = ":Git push --set-upstream origin ",
+		-- ["<leader>fe"] = ":Git fetch --all -p<CR>",
+		-- ["<leader>pl"] = ":Git pull<CR>",
+		-- ["<leader>ss"] = ":Git stash save<CR>",
+		-- ["<leader>sp"] = ":Git stash pop<CR>",
 		-- ["<leader>gs"] = ":LazyGit<CR>",
 		["<leader>da"] = ":DiffviewFileHistory %<CR>",
 		["<leader>dh"] = ":DiffviewFileHistory<CR>",
@@ -324,35 +324,35 @@ nnoremap <A-f> :call FindAll()<cr>
 -- verife this code:
 -- return vim.api.nvim_list_bufs()
 
-vim.cmd([[
-let mapleader = " "
-function! s:AskForConfirmation(message, command) abort
-  echohl WarningMsg
-  echom 'Are you sure '.. a:message ..'?'
-  while 1
-    let choice = inputlist(['1. yes', '2. no'])
-    if choice == 'q' || choice == ''
-      return
-    endif
-    if choice == 0 || choice > 2
-      redraw!
-      echohl WarningMsg
-      echo 'Please enter a number between 1 and 3'
-      echohl None
-      continue
-    elseif choice == 1
-      echom ' ...'
-      exec a:command
-      return
-    endif
-    return
-  endwhile
-endfunction
+-- vim.cmd([[
+-- let mapleader = " "
+-- function! s:AskForConfirmation(message, command) abort
+--   echohl WarningMsg
+--   echom 'Are you sure '.. a:message ..'?'
+--   while 1
+--     let choice = inputlist(['1. yes', '2. no'])
+--     if choice == 'q' || choice == ''
+--       return
+--     endif
+--     if choice == 0 || choice > 2
+--       redraw!
+--       echohl WarningMsg
+--       echo 'Please enter a number between 1 and 3'
+--       echohl None
+--       continue
+--     elseif choice == 1
+--       echom ' ...'
+--       exec a:command
+--       return
+--     endif
+--     return
+--   endwhile
+-- endfunction
 
-noremap <leader>re :call <SID>AskForConfirmation('reset HEAD for this branch ',':Git reset HEAD~1')<CR>
-
-noremap <leader>ps :call <SID>AskForConfirmation('push commit ',':Git push')<CR>
-]])
+--  noremap <leader>re :call <SID>AskForConfirmation('reset HEAD for this branch ',':Git reset HEAD~1')<CR>
+--
+--  noremap <leader>ps :call <SID>AskForConfirmation('push commit ',':Git push')<CR>
+--  ]])
 
 vim.keymap.set("n", "Q", function()
 	local bufs = vim.api.nvim_list_bufs()
