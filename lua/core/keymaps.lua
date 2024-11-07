@@ -5,7 +5,7 @@ keymaps.delete_default = {
 		"p",
 		"n",
 		"<C-q>",
-		"<C-i>",
+		-- "<C-i>",
 		"<C-w>",
 		"<C-z>",
 		"<C-c>",
@@ -62,6 +62,8 @@ keymaps.basic = {
 		["<C-q>"] = "<Esc>",
 		["<F1>"] = ":LspRestart<CR>",
 		["`"] = ":",
+		["<C-A-j>"] = ":m .+1==<CR>",
+		["<C-A-k>"] = ":m .-2==<CR>",
 	},
 	["i"] = {
 		["<C-q>"] = "<Esc>",
@@ -103,7 +105,7 @@ keymaps.view_panels_control = {
 		["<A-Right>"] = ":vertical resize +2<CR>",
 		["<A-Left>"] = ":vertical resize -2<CR>",
 
-		["<A-1>"] = ":LualineBuffersJump 1<CR>",
+		--[[ ["<A-1>"] = ":LualineBuffersJump 1<CR>",
 		["<A-2>"] = ":LualineBuffersJump 2<CR>",
 		["<A-3>"] = ":LualineBuffersJump 3<CR>",
 		["<A-4>"] = ":LualineBuffersJump 4<CR>",
@@ -131,7 +133,7 @@ keymaps.view_panels_control = {
 		["<A-v>6"] = "<cmd>vsplit<CR><cmd>LualineBuffersJump 6<CR>",
 		["<A-v>7"] = "<cmd>vsplit<CR><cmd>LualineBuffersJump 7<CR>",
 		["<A-v>8"] = "<cmd>vsplit<CR><cmd>LualineBuffersJump 8<CR>",
-		["<A-v>9"] = "<cmd>vsplit<CR><cmd>LualineBuffersJump 9<CR>",
+		["<A-v>9"] = "<cmd>vsplit<CR><cmd>LualineBuffersJump 9<CR>", ]]
 
 		["\\1"] = "1gt",
 		["\\2"] = "2gt",
@@ -152,9 +154,9 @@ keymaps.telescope = {
 		["<C-s>"] = "<cmd>lua require('telescope.builtin').live_grep({hidden = true})<CR>",
 		["<C-r>"] = "<cmd>lua require('telescope.builtin').lsp_references()<CR>",
 		["<C-b>"] = "<cmd>lua require('telescope.builtin').buffers()<cr>",
-		["<C-g>"] = ":Telescope git_branches<CR>",
+		-- ["<C-g>"] = ":Telescope git_branches<CR>",
 		--["<C-s>"] = ":Telescope git_stash<CR>",
-		["<C-i>"] = "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>",
+		["<C-m>"] = "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>",
 		--["<C-e>"] = "<cmd>lua require('telescope.builtin').diagnostics()<CR>",
 		["<C-k>"] = "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>",
 		["gd"] = "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>",

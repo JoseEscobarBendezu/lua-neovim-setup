@@ -64,8 +64,8 @@ return {
 			keymap("n", "gD", vim.lsp.buf.declaration, bufopts)
 			keymap("n", "gc", vim.lsp.buf.code_action, bufopts)
 			keymap("n", "gr", vim.lsp.buf.rename, bufopts)
-			keymap("n", "gv", "<cmd>vsplit<cr><cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
-			keymap("n", "gx", "<cmd>split<cr><cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
+			-- keymap("n", "gv", "<cmd>vsplit<cr><cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
+			-- keymap("n", "gx", "<cmd>split<cr><cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
 			keymap("n", "gq", vim.lsp.buf.signature_help, bufopts)
 		end
 
