@@ -3,6 +3,8 @@ local prefix = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config")
 
 vim.keymap.set("n", "<Space>", "<Nop>")
 vim.g.mapleader = " " -- set mapleader with <space>
+vim.g.loaded_lua_manual = 0
+vim.g.lua_manual_disabled = true -- remove lua manual
 
 vim.opt.undodir = { prefix .. "/nvim/.undo//" }
 

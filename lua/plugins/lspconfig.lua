@@ -58,15 +58,15 @@ return {
 			keymap("n", "gp", vim.diagnostic.open_float, opts)
 			keymap("n", "pd", vim.diagnostic.goto_prev, opts)
 			keymap("n", "nd", vim.diagnostic.goto_next, opts)
-			keymap("n", "gi", vim.lsp.buf.implementation, bufopts)
 			keymap("n", "gh", vim.lsp.buf.hover, bufopts)
-			--keymap("n", "gd", vim.lsp.buf.definition, bufopts)
 			keymap("n", "gD", vim.lsp.buf.declaration, bufopts)
 			keymap("n", "gc", vim.lsp.buf.code_action, bufopts)
 			keymap("n", "gr", vim.lsp.buf.rename, bufopts)
+			keymap("n", "gs", vim.lsp.buf.signature_help, bufopts)
+			-- keymap("n", "gi", vim.lsp.buf.implementation, bufopts)
+			-- keymap("n", "gd", vim.lsp.buf.definition, bufopts)
 			-- keymap("n", "gv", "<cmd>vsplit<cr><cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
 			-- keymap("n", "gx", "<cmd>split<cr><cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
-			keymap("n", "gq", vim.lsp.buf.signature_help, bufopts)
 		end
 
 		local mason = require("mason")
