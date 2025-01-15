@@ -1,6 +1,9 @@
 return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		dependencies = {
+			"HiPhish/rainbow-delimiters.nvim",
+		},
 		event = "BufEnter",
 		main = "ibl",
 		opts = {
@@ -51,14 +54,19 @@ return {
 				vim.api.nvim_set_hl(0, "IndentBlanklineIndent6", { fg = "#683f74", nocombine = true })
 			end)
 
+			vim.g.rainbow_delimiters = { highlight = highlight }
+
 			require("ibl").setup({
 				scope = {
-					enabled = false,
-					show_start = false,
-					show_end = false,
+					enabled = true,
+					show_start = true,
+					show_end = true,
+					highlight = highlight,
 				},
-				indent = { highlight = highlight },
+				-- indent = { highlight = highlight },
 			})
+
+			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 		end,
 	},
 }
