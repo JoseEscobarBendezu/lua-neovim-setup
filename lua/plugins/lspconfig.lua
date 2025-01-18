@@ -87,8 +87,21 @@ return {
 						on_attach = on_attach,
 					})
 				end,
+        lua_ls = function ()
+          lspconfig.lua_ls.setup({
+            on_attach = on_attach,
+            settings = {
+              Lua = {
+                diagnostics = {
+                    globals = {'vim'}
+                }
+              }
+            }
+          })
+        end,
 				volar = function()
 					lspconfig.volar.setup({
+            on_attach = on_attach,
 						filetypes = { "vue", "javascript", "typescript" },
 						init_options = {
 							vue = { hybridMode = false },
