@@ -43,7 +43,7 @@ return {
 		{ "hrsh7th/cmp-cmdline" }, -- Optional
 
 		-- Snippets
-		{ "L3MON4D3/LuaSnip" }, -- Required
+		{ "L3MON4D3/LuaSnip", version = "v2.*", }, -- Required
 		-- { "rafamadriz/friendly-snippets" }, -- Optional
 	},
 	config = function()
@@ -130,7 +130,7 @@ return {
 					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
 					-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
 					-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-					-- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+					vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
 				end,
 			},
 			window = {
@@ -157,7 +157,7 @@ return {
 			completion = {
 				completeopt = "menu,menuone,noinsert",
 				keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-				keyword_length = 1,
+				keyword_length = 2,
 			},
 			formatting = {
 				fields = { "kind", "abbr" },
@@ -171,7 +171,12 @@ return {
 		})
 
 		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline(),
+			mapping = cmp.mapping.preset.cmdline({
+				["<A-e>"] = cmp.mapping.close(),
+				["<Tab>"] = cmp.mapping.confirm({ select = true }),
+				["<A-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+				["<A-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+      }),
 			sources = cmp.config.sources({
 				{ name = "path" },
 			}, {
