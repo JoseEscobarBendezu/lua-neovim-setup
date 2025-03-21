@@ -53,7 +53,7 @@ keymaps.basic = {
 	["n"] = {
 		["pp"] = "]p",
 		["r"] = "<C-r>",
-		["w"] = ":w<CR>",
+		["w"] = ":silent w<CR>",
 		["<leader>f"] = "<Plug>(easymotion-overwin-f2)",
 		["Q"] = ":%bd|e#|bd#<cr>|'\"",
 		["cc"] = "<Plug>(comment_toggle_linewise_current)",
@@ -232,7 +232,12 @@ function s:close_window()
 
   if size_buffers == 1
     "no hay mas buffers
-    exec ':quitall'
+    try
+      exec ':silent quitall'
+    catch
+      echohl WarningMsg
+      echom "Tienes cambios pendientes en el buffer"
+    endtry
     return
   endif
   

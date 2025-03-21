@@ -43,7 +43,7 @@ return {
 		{ "hrsh7th/cmp-cmdline" }, -- Optional
 
 		-- Snippets
-		{ "L3MON4D3/LuaSnip", version = "v2.*", }, -- Required
+		{ "L3MON4D3/LuaSnip" }, -- Required
 		-- { "rafamadriz/friendly-snippets" }, -- Optional
 	},
 	config = function()
@@ -80,6 +80,7 @@ return {
 				"html",
 				"lua_ls",
 				"eslint",
+        "intelephense",
 			},
 			handlers = {
 				function(server_name)

@@ -17,6 +17,7 @@ return {
 				"java",
 				"query",
 				"gitcommit",
+        "php",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
