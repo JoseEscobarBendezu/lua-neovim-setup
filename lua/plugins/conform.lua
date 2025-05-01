@@ -6,7 +6,7 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local function format_hunks()
-			local ignore_filetypes = { "lua" }
+			local ignore_filetypes = { "lua", "php" }
 
 			if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
 				vim.notify("range formatting for " .. vim.bo.filetype .. " not working properly.")
@@ -23,7 +23,7 @@ return {
 
 			local function format_range()
 				if next(hunks) == nil then
-					vim.notify("done formatting git hunks", "info", { title = "formatting" })
+					vim.notify("save and formatting", "info", { title = "formatting" })
 					return
 				end
 				local hunk = nil
@@ -34,8 +34,19 @@ return {
 				if hunk ~= nil and hunk.type ~= "delete" then
 					local start = hunk.added.start
 					local last = start + hunk.added.count
-					-- nvim_buf_get_lines uses zero-based indexing -> subtract from last
-					local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
+          local last_hunk_line
+          local status, result = pcall(function()
+   					-- nvim_buf_get_lines uses zero-based indexing -> subtract from last
+            return vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
+          end)
+
+          if status then
+            last_hunk_line = result
+          else
+            local line_count = vim.api.nvim_buf_line_count(0)
+            last_hunk_line = tostring(line_count)
+          end
+
 					local range = { start = { start, 0 }, ["end"] = { last - 1, last_hunk_line:len() } }
 					format({ range = range, async = false, lsp_fallback = true }, function()
 						vim.defer_fn(function()
@@ -60,6 +71,7 @@ return {
 				html = { "prettierd", "prettier", stop_after_first = true },
 				json = { "prettierd", "prettier", stop_after_first = true },
 				markdown = { "prettierd", "prettier", stop_after_first = true },
+        -- php = { "php-cs-fixer", "php-cs-fixer", stop_after_firststop_after_first = true },
 			},
 			format_on_save = function()
 				format_hunks()

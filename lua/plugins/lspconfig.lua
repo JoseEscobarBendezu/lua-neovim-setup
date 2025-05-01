@@ -42,11 +42,96 @@ return {
 		{ "hrsh7th/cmp-nvim-lua" }, -- Optional
 		{ "hrsh7th/cmp-cmdline" }, -- Optional
 
+    -- Autopairs
+    { 'windwp/nvim-autopairs',
+      event = "InsertEnter",
+      config = true
+    },
+
 		-- Snippets
-		{ "L3MON4D3/LuaSnip" }, -- Required
+		-- { "L3MON4D3/LuaSnip" }, -- Required
 		-- { "rafamadriz/friendly-snippets" }, -- Optional
 	},
 	config = function()
+    local cmp = require("cmp")
+
+    cmp.setup({
+      snippet = {
+        -- REQUIRED - you must specify a snippet engine
+        expand = function(args)
+          --vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+          -- require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+          -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+          -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+          vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+        end,
+      },
+      window = {
+        completion = {
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+          col_offset = -3,
+          side_padding = 0,
+        },
+      },
+      mapping = cmp.mapping.preset.insert({
+        ["<A-e>"] = cmp.mapping.close(),
+        ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+        ["<A-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        ["<A-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+      }),
+      sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "luasnip" }, -- For luasnip users.
+        -- { name = 'ultisnips' }, -- For ultisnips users.
+        -- { name = 'snippy' }, -- For snippy users.
+      }, {
+        { name = "buffer" },
+      }),
+      completion = {
+        completeopt = "menu,menuone,noinsert",
+        keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
+        keyword_length = 2,
+      },
+      formatting = {
+        fields = { "kind", "abbr" },
+        format = function(_, vim_item)
+          vim_item.menu = vim_item.kind
+          vim_item.kind = " " .. (icons[vim_item.kind] or "") .. " "
+
+          return vim_item
+        end,
+      },
+    })
+
+    cmp.setup.cmdline(":", {
+      mapping = cmp.mapping.preset.cmdline({
+        ["<A-e>"] = cmp.mapping.close(),
+        ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+        ["<A-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        ["<A-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+      }),
+      sources = cmp.config.sources({
+        { name = "path" },
+      }, {
+        {
+          name = "cmdline",
+          option = {
+            ignore_cmds = { "Man", "!" },
+          },
+        },
+      }),
+    })
+
+    -- If you want insert `(` after select function or method item
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    cmp.event:on(
+      'confirm_done',
+      cmp_autopairs.on_confirm_done()
+    )
+
+    -- Set up lspconfig.
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 		local lspconfig = require("lspconfig")
 
 		local on_attach = function(_, bufnr)
@@ -86,11 +171,13 @@ return {
 				function(server_name)
 					require("lspconfig")[server_name].setup({
 						on_attach = on_attach,
+            capabilities = capabilities,
 					})
 				end,
         lua_ls = function ()
           lspconfig.lua_ls.setup({
             on_attach = on_attach,
+            capabilities = capabilities,
             settings = {
               Lua = {
                 diagnostics = {
@@ -103,6 +190,7 @@ return {
 				volar = function()
 					lspconfig.volar.setup({
             on_attach = on_attach,
+            capabilities = capabilities,
 						filetypes = { "vue", "javascript", "typescript" },
 						init_options = {
 							vue = { hybridMode = false },
@@ -118,76 +206,8 @@ return {
 				"prettierd",
 				"eslint_d",
 				"stylua",
+        "php-cs-fixer",
 			},
-		})
-
-		local cmp = require("cmp")
-
-		cmp.setup({
-			snippet = {
-				-- REQUIRED - you must specify a snippet engine
-				expand = function(args)
-					--vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-					-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-					-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-					vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
-				end,
-			},
-			window = {
-				completion = {
-					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-					col_offset = -3,
-					side_padding = 0,
-				},
-			},
-			mapping = cmp.mapping.preset.insert({
-				["<A-e>"] = cmp.mapping.close(),
-				["<Tab>"] = cmp.mapping.confirm({ select = true }),
-				["<A-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-				["<A-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-			}),
-			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" }, -- For luasnip users.
-				-- { name = 'ultisnips' }, -- For ultisnips users.
-				-- { name = 'snippy' }, -- For snippy users.
-			}, {
-				{ name = "buffer" },
-			}),
-			completion = {
-				completeopt = "menu,menuone,noinsert",
-				keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-				keyword_length = 2,
-			},
-			formatting = {
-				fields = { "kind", "abbr" },
-				format = function(_, vim_item)
-					vim_item.menu = vim_item.kind
-					vim_item.kind = " " .. (icons[vim_item.kind] or "") .. " "
-
-					return vim_item
-				end,
-			},
-		})
-
-		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline({
-				["<A-e>"] = cmp.mapping.close(),
-				["<Tab>"] = cmp.mapping.confirm({ select = true }),
-				["<A-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-				["<A-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-      }),
-			sources = cmp.config.sources({
-				{ name = "path" },
-			}, {
-				{
-					name = "cmdline",
-					option = {
-						ignore_cmds = { "Man", "!" },
-					},
-				},
-			}),
 		})
 
 		vim.fn.sign_define(

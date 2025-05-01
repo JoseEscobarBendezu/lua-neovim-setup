@@ -226,7 +226,12 @@ function s:close_window()
 
   "es el ultimo?
   if win_screenpos("%") != [2,1] && size_buffers > 1
-    exec ':bdelete'
+    try
+      exec ':silent bdelete'
+    catch
+      echohl WarningMsg
+      echom "Tienes cambios pendientes sin guardar"
+    endtry
     return
   endif
 
@@ -236,7 +241,7 @@ function s:close_window()
       exec ':silent quitall'
     catch
       echohl WarningMsg
-      echom "Tienes cambios pendientes en el buffer"
+      echom "Tienes cambios pendientes sin guardar"
     endtry
     return
   endif
