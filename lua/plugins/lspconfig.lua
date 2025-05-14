@@ -132,8 +132,6 @@ return {
     -- Set up lspconfig.
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-		local lspconfig = require("lspconfig")
-
 		local on_attach = function(_, bufnr)
 			local opts = { noremap = true, silent = true }
 			local keymap = vim.keymap.set
@@ -167,39 +165,35 @@ return {
 				"eslint",
         "intelephense",
 			},
-			handlers = {
-				function(server_name)
-					require("lspconfig")[server_name].setup({
-						on_attach = on_attach,
-            capabilities = capabilities,
-					})
-				end,
-        lua_ls = function ()
-          lspconfig.lua_ls.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            settings = {
-              Lua = {
-                diagnostics = {
-                    globals = {'vim'}
-                }
-              }
-            }
-          })
-        end,
-				volar = function()
-					lspconfig.volar.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-						filetypes = { "vue", "javascript", "typescript" },
-						init_options = {
-							vue = { hybridMode = false },
-							typescript = { tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib" },
-						},
-					})
-				end,
-			},
 		})
+
+    vim.lsp.config('*', {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      root_markers = { '.git' },
+    })
+
+    vim.lsp.config('lua_ls',{
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+              globals = {'vim'}
+          }
+        }
+      }
+    })
+
+    vim.lsp.config('volar',{
+      on_attach = on_attach,
+      capabilities = capabilities,
+      filetypes = { "vue", "javascript", "typescript" },
+      init_options = {
+        vue = { hybridMode = false },
+        typescript = { tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib" },
+      },
+    })
 
 		require("mason-tool-installer").setup({
 			ensure_installed = {
@@ -210,22 +204,34 @@ return {
 			},
 		})
 
-		vim.fn.sign_define(
-			"DiagnosticSignError",
-			{ text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "DiagnosticLineNrError" }
-		)
-		vim.fn.sign_define(
-			"DiagnosticSignWarn",
-			{ text = "", texthl = "DiagnosticSignWarn", linehl = "", numhl = "DiagnosticLineNrWarn" }
-		)
-		vim.fn.sign_define(
-			"DiagnosticSignInfo",
-			{ text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "DiagnosticLineNrInfo" }
-		)
-		vim.fn.sign_define(
-			"DiagnosticSignHint",
-			{ text = "", texthl = "DiagnosticSignHint", linehl = "", numhl = "DiagnosticLineNrHint" }
-		)
+    vim.diagnostic.config({
+      signs = {
+          text = {
+              [vim.diagnostic.severity.ERROR] = "",
+              [vim.diagnostic.severity.WARN] = "",
+              [vim.diagnostic.severity.INFO] = "",
+              [vim.diagnostic.severity.HINT] = "",
+          },
+          texthl = {
+              [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+              [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+              [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+              [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+          },
+          linehl = {
+              [vim.diagnostic.severity.ERROR] = "",
+              [vim.diagnostic.severity.WARN] = "",
+              [vim.diagnostic.severity.HINT] = "",
+              [vim.diagnostic.severity.INFO] = "",
+          },
+          numhl = {
+              [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+              [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+              [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+              [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+          },
+      },
+    })
 
 		vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#36A3D9", bold = true })
 		vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#BF616A", bold = true })
