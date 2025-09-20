@@ -18,6 +18,7 @@ return {
 				"query",
 				"gitcommit",
         "php",
+        "markdown"
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)

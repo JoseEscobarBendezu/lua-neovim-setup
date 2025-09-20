@@ -156,8 +156,8 @@ return {
 		mason.setup()
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				-- "tsserver",
-				"volar",
+				"ts_ls",
+				-- "volar",
 				"cssls",
 				"tailwindcss",
 				"html",
@@ -185,7 +185,7 @@ return {
       }
     })
 
-    vim.lsp.config('volar',{
+    --[[ vim.lsp.config('volar',{
       on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { "vue", "javascript", "typescript" },
@@ -193,7 +193,7 @@ return {
         vue = { hybridMode = false },
         typescript = { tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib" },
       },
-    })
+    }) ]]
 
 		require("mason-tool-installer").setup({
 			ensure_installed = {
