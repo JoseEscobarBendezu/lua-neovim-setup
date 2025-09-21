@@ -1,5 +1,6 @@
 return {
 	"stevearc/conform.nvim",
+  -- enabled = false,
 	dependencies = {
 		{ "lewis6991/gitsigns.nvim" },
 	},
@@ -73,19 +74,11 @@ return {
 				html = { "prettierd", "prettier" },
 				json = { "prettierd", "prettier" },
 				markdown = { "prettierd", "prettier" },
-        -- php = { "php-cs-fixer", "php-cs-fixer", stop_after_firststop_after_first = true },
 			},
-			format_on_save = function()
-				format_hunks()
-			end,
 		})
 
 		vim.keymap.set({ "n", "v" }, "<leader>cf", function()
-			conform.format({
-				lsp_fallback = true,
-				async = false,
-				timeout_ms = 500,
-			})
+      format_hunks()
 		end, { desc = "Format File or Range (visual mode)" })
 	end,
 }

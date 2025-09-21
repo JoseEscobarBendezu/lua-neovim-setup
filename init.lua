@@ -1,4 +1,8 @@
-require("core") -- call global configurations
+require("core.options")
+require("core.lazy")
+require("core.keymaps")
+require("core.lsp")
+require("core.autocmd")
 
 --empaquetador -> lazy ✅
 --tema -> kanagawa ✅
