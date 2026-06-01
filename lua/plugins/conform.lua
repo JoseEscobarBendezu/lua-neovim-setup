@@ -7,7 +7,7 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local function format_hunks()
-			local ignore_filetypes = { "lua", "php" }
+			local ignore_filetypes = { "php" }
 
 			if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
 				vim.notify("range formatting for " .. vim.bo.filetype .. " not working properly.")

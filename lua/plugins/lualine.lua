@@ -22,6 +22,17 @@ return {
 
 			return "Buffers ocultos: " .. buf_size
 		end
+
+    local function get_project_root_name()
+      local root_markers = { ".git", "Makefile", "package.json" }
+      local root = vim.fs.root(vim.api.nvim_buf_get_name(0), root_markers)
+      if root then
+        return vim.fs.basename(root)
+      else
+        return "Raíz del proyecto no encontrada"
+      end
+    end
+
 		lualine.setup({
 			options = {
 				icons_enabled = true,
@@ -35,9 +46,8 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = { "branch" },
 				lualine_c = { "%=", "%f" },
-				lualine_x = { --[[ "diagnostics" ]]
-				},
-				lualine_y = { --[[ "diff" , ]]
+				lualine_x = { get_project_root_name },
+				lualine_y = {
 					buffers,
 					"progress",
 				},

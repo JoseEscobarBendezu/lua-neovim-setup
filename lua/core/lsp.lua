@@ -25,13 +25,14 @@ vim.diagnostic.config({
         numhl = {
             [vim.diagnostic.severity.ERROR] = "ErrorMsg",
             [vim.diagnostic.severity.WARN] = "WarningMsg",
+            [vim.diagnostic.severity.HINT] = "DiagnosticHint",
+            [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
         },
     },
 })
-vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#36A3D9", bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#BF616A", bold = true })
 
-vim.api.nvim_set_hl(0, "DiagnosticLineNrError", { bg = "#51202A", fg = "#BF616A", bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticLineNrWarn", { bg = "#51412A", fg = "#FFA500", bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticLineNrInfo", { bg = "#1E535D", fg = "#00FFFF", bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticLineNrHint", { bg = "#1E205D", fg = "#0000FF", bold = true })
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ebcb8b", bg = "NONE", bold = true })
+vim.api.nvim_set_hl(0, "ErrorMsg", { bg = "#51202A", fg = "#BF616A", bold = true })
+vim.api.nvim_set_hl(0, "WarningMsg", { bg = "#51412A", fg = "#FFA500", bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticInfo", { bg = "#1E535D", fg = "#00FFFF", bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticHint", { bg = "#1E205D", fg = "#0000FF", bold = true })

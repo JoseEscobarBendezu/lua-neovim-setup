@@ -11,9 +11,9 @@ return {
 			javascript = { "eslint_d" },
 			typescript = { "eslint_d" },
 			vue = { "eslint_d" },
+      -- lua = { "stylua" },
 			-- javascriptreact = { "eslint_d" },
 			-- typescriptreact = { "eslint_d" },
-      -- lua = { "stylua" },
     }
 
 		lint.linters.eslint_d = require("lint.util").wrap(lint.linters.eslint_d, function(diagnostic)

@@ -27,7 +27,7 @@ return {
     -- See :h blink-cmp-config-keymap for defining your own keymap
     keymap = {
       preset = 'enter',
-      ['<Tab>'] = { 'select_next', 'fallback' },
+      -- ['<Tab>'] = { 'select_next', 'fallback' },
     },
 
     appearance = {
@@ -38,6 +38,24 @@ return {
 
     -- (Default) Only show the documentation popup when manually triggered
     completion = { documentation = { auto_show = true } },
+
+    cmdline = {
+      enabled = true,
+      keymap = {
+        -- recommended, as the default keymap will only show and select the next item
+        ['<CR>'] = { 'accept' },
+        ['<Tab>'] = {  },
+      },
+      completion = {
+        menu = {
+          auto_show = function(ctx)
+            return vim.fn.getcmdtype() == ':'
+            -- enable for inputs as well, with:
+            -- or vim.fn.getcmdtype() == '@'
+          end,
+        },
+      }
+    },
 
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
@@ -50,7 +68,7 @@ return {
     -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
     --
     -- See the fuzzy documentation for more information
-    fuzzy = { implementation = "prefer_rust_with_warning" }
+    fuzzy = { implementation = "prefer_rust_with_warning" },
   },
-  opts_extend = { "sources.default" }
+  opts_extend = { "sources.default" },
 }
