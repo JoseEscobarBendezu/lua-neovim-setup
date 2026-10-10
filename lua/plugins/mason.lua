@@ -13,13 +13,12 @@ return {
         "vtsls",
         "lua_ls",
         "tailwindcss",
-        -- "eslint",
+        "biome",
       },
     })
     require("mason-tool-installer").setup({
 			ensure_installed = {
 				"prettierd",
-				"eslint_d",
 				"stylua",
 			},
 		})

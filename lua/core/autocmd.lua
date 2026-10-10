@@ -8,9 +8,29 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- defaults:
         -- https://neovim.io/doc/user/news-0.11.html#_defaults
 
+        --[[ local function go_to_definition ()
+          vim.lsp.buf.definition({
+            on_list = function (_, result)
+              if not result or vim.tbl_isempty(result) then
+                return
+              end
+
+              if #result == 1 then
+                vim.lsp.buf.definition_jump()
+              else
+                vim.lsp.util.preview_location(result[1], { border = "rounded" })
+              end
+            end
+          })
+        end
+
+        map("gd", go_to_definition , "Ir a definición ( flotante si es multiple )") ]]
+
         map("gd", vim.lsp.buf.definition, "Goto Definition")
         map("gr", vim.lsp.buf.rename, "Rename all references")
         map("gp", vim.diagnostic.open_float, "Open Diagnostic Float")
+        map("pd", vim.diagnostic.goto_prev, "Goto prev diagnostic")
+        map("nd", vim.diagnostic.goto_next, "Goto next diagnostic")
         map("gh", vim.lsp.buf.hover, "Hover Documentation")
         map("gD", vim.lsp.buf.declaration, "Goto Declaration")
         map("gc", vim.lsp.buf.code_action, "Code Action")
@@ -55,4 +75,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
             })
         end
     end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
 })

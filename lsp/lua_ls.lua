@@ -19,7 +19,10 @@ return {
       },
       diagnostics = {
         globals = { 'vim', 'require' }
-      }
+      },
+      format = {
+        enable = false,  -- ← esto desactiva el formatter interno de lua_ls
+      },
     }
   }
 }

@@ -3,7 +3,10 @@ vim.lsp.enable({
     "vue_ls",
     "vtsls",
     "lua_ls",
+    "biome",
 })
+
+vim.lsp.config('stylua', { enabled = false })
 
 vim.diagnostic.config({
     virtual_lines = true,

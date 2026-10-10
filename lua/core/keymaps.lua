@@ -352,8 +352,8 @@ end, { noremap = true })
 
 vim.cmd([[ 
 
-cnoremap <C-h> <Left>
-cnoremap <C-l> <Right>
+cnoremap <A-h> <Left>
+cnoremap <A-l> <Right>
 cnoremap <C-q> <ESC>
 
 ]])

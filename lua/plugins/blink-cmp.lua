@@ -43,7 +43,7 @@ return {
       enabled = true,
       keymap = {
         -- recommended, as the default keymap will only show and select the next item
-        ['<CR>'] = { 'accept' },
+        -- ['<CR>'] = { 'accept' },
         ['<Tab>'] = {  },
       },
       completion = {
